@@ -1,0 +1,85 @@
+---
+import Container from "../../components/ui/Container.astro";
+---
+
+<section 
+  aria-labelledby="methodology-heading"
+  class="relative py-32 lg:py-40"
+>
+
+  <Container class="relative z-10">
+
+    <div class="mx-auto max-w-3xl text-center">
+      
+      <h2 
+        id="methodology-heading"
+        class="text-4xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-5xl md:text-6xl"
+      >
+        Security Built Into 
+        <span class="whitespace-nowrap bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] bg-clip-text text-transparent">Every Step</span>
+      </h2>
+
+      <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-text-muted)] sm:text-xl">
+        Every engagement follows a rigorous, structured architecture ensuring absolute resilience, zero-trust security, and infinite scalability.
+      </p>
+      
+    </div>
+
+    <div class="relative mt-24">
+      
+      <div 
+        aria-hidden="true" 
+        class="absolute left-0 top-7 hidden h-[1px] w-full bg-gradient-to-r from-transparent via-[var(--color-border)] to-transparent lg:block transform-gpu"
+      ></div>
+
+      <ol 
+        class="grid gap-8 lg:grid-cols-5"
+        aria-label="5-Step Security Methodology"
+      >
+        {[
+          { number: "01", title: "Assess", description: "Threat modeling, risk assessment, and mapping goals." },
+          { number: "02", title: "Design", description: "Architecting robust, scalable cloud-native infrastructure." },
+          { number: "03", title: "Build", description: "Developing modular solutions with secure principles." },
+          { number: "04", title: "Secure", description: "Rigorous vulnerability testing and continuous validation." },
+          { number: "05", title: "Scale", description: "Optimizing pipelines for seamless future growth." },
+        ].map((item, index) => (
+          <li class="group relative flex flex-col rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)]/50 p-8 backdrop-blur-xl transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 hover:border-[var(--color-accent)]/40 hover:bg-[var(--color-surface)] hover:shadow-2xl hover:shadow-[var(--color-accent-glow)] transform-gpu">
+
+            <div 
+              aria-hidden="true" 
+              class="absolute inset-0 z-0 rounded-[24px] bg-gradient-to-b from-[var(--color-accent)]/5 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100 transform-gpu"
+            ></div>
+
+            <div 
+              aria-hidden="true"
+              class="relative z-10 mb-8 flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] text-lg font-black text-[var(--color-text-muted)] shadow-sm transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:border-[var(--color-accent)]/50 group-hover:text-[var(--color-accent)] group-hover:shadow-[0_0_15px_var(--color-accent-glow)] transform-gpu"
+            >
+              {item.number}
+            </div>
+
+            <div class="relative z-10">
+              <h3 class="text-xl font-bold text-[var(--color-text)] transition-colors duration-300 group-hover:text-[var(--color-accent)]">
+                <span class="sr-only">Step {Number(item.number)}: </span>
+                {item.title}
+              </h3>
+              
+              <p class="mt-4 text-sm leading-relaxed text-[var(--color-text-muted)] transition-colors duration-300">
+                {item.description}
+              </p>
+            </div>
+
+            {index !== 4 && (
+              <div 
+                aria-hidden="true" 
+                class="absolute -bottom-8 left-14 h-8 w-[1px] bg-[var(--color-border)] lg:hidden transform-gpu"
+              ></div>
+            )}
+
+          </li>
+        ))}
+      </ol>
+
+    </div>
+
+  </Container>
+</section>

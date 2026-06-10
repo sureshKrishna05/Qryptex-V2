@@ -1,0 +1,490 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/ui/Container.astro";
+---
+
+<BaseLayout
+  title="Contact Our Engineering Team"
+  description="Get in touch with Qryptex to discuss your enterprise cybersecurity, AI automation, or custom software development requirements."
+>
+  <div class="relative overflow-hidden pt-16 pb-8 md:pt-20 md:pb-12 bg-[var(--color-background)]">
+    <Container>
+      <div class="mx-auto max-w-3xl text-center">
+        <h1 class="text-5xl font-extrabold tracking-tight text-[var(--color-text)] md:text-7xl">
+          Let's Build Something <br class="hidden md:block" />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)]">
+            Exceptional
+          </span>
+        </h1>
+
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-text-muted)]">
+          Whether you need enterprise-grade cybersecurity, an AI-powered platform, or a completely custom software solution, our engineers are ready to execute.
+        </p>
+      </div>
+    </Container>
+  </div>
+
+  <section class="relative z-10 pb-32">
+    <Container>
+      <div class="mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xl shadow-[var(--color-border)]/50">
+
+        <div class="flex flex-col lg:flex-row">
+
+          <!-- LEFT SIDE -->
+          <div class="relative overflow-hidden bg-[var(--color-background)] p-8 md:p-12 lg:w-5/12 lg:p-16 border-r border-[var(--color-border)]">
+
+            <div class="relative z-10">
+
+              <h2 class="text-3xl font-bold text-[var(--color-text)]">
+                Get in touch
+              </h2>
+
+              <p class="mt-4 text-lg text-[var(--color-text-muted)]">
+                Tell us about your technical challenges. We'll set up a discovery call to map out a strategic solution.
+              </p>
+
+              <div class="mt-12 space-y-6">
+
+                <a
+                  href="mailto:contact@qryptex.in"
+                  class="group flex items-start gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 sm:p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)]"
+                >
+                  <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--color-background)] text-[var(--color-accent)] border border-[var(--color-border)]">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.5">
+                      <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                    </svg>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <h3 class="font-semibold text-[var(--color-text)]">
+                      Email
+                    </h3>
+
+                    <p class="mt-1 break-all text-[var(--color-text-muted)] transition-colors group-hover:text-[var(--color-text)]">
+                      contact@qryptex.in
+                    </p>
+                  </div>
+                </a>
+
+                <div class="flex items-start gap-4 rounded-2xl border border-[var(--color-border)] bg-transparent p-4 sm:p-5">
+
+                  <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--color-surface)] text-[var(--color-accent)] border border-[var(--color-border)]">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.5">
+                      <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <h3 class="font-semibold text-[var(--color-text)]">
+                      SLA
+                    </h3>
+
+                    <p class="mt-1 text-[var(--color-text-muted)]">
+                      Expect a technical response within 24–48 hours.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT SIDE -->
+          <div class="relative p-8 md:p-12 lg:w-7/12 lg:p-16 flex flex-col justify-center min-h-[500px]">
+
+            <form id="contact-form" class="w-full relative">
+
+              <!-- FORM -->
+              <div
+                id="form-fields"
+                class="space-y-8 transition-all duration-500 opacity-100 translate-y-0 scale-100"
+              >
+
+                <div class="grid gap-8 md:grid-cols-2">
+
+                  <div class="space-y-2.5">
+                    <label
+                      for="name"
+                      class="block text-sm font-semibold text-[var(--color-text)]"
+                    >
+                      Full Name *
+                    </label>
+
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      placeholder="e.g. Sarah Connor"
+                      class="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] px-4 py-3.5 text-[var(--color-text)] outline-none focus:border-[var(--color-accent)]"
+                    />
+                  </div>
+
+                  <div class="space-y-2.5">
+                    <label
+                      for="email"
+                      class="block text-sm font-semibold text-[var(--color-text)]"
+                    >
+                      Work Email *
+                    </label>
+
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="sarah@company.com"
+                      class="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] px-4 py-3.5 text-[var(--color-text)] outline-none focus:border-[var(--color-accent)]"
+                    />
+                  </div>
+
+                </div>
+
+                <div class="space-y-2.5">
+                  <label
+                    for="details"
+                    class="block text-sm font-semibold text-[var(--color-text)]"
+                  >
+                    Project Details *
+                  </label>
+
+                  <textarea
+                    id="details"
+                    name="details"
+                    rows="5"
+                    required
+                    placeholder="Share your goals, current stack, or the problem you are trying to solve..."
+                    class="w-full resize-y rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] px-4 py-3.5 text-[var(--color-text)] outline-none focus:border-[var(--color-accent)]"
+                  ></textarea>
+                </div>
+
+                <!-- HONEYPOT -->
+                <input
+                  type="text"
+                  name="website"
+                  tabindex="-1"
+                  autocomplete="off"
+                  class="hidden"
+                />
+
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between pt-4">
+
+                  <p class="text-sm text-[var(--color-text-muted)]">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                      class="mr-1.5 inline-block h-4 w-4 text-[var(--color-accent)]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2">
+                      <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.95 11.95 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+
+                    Strictly confidential.
+                  </p>
+
+                  <button
+                    id="submit-btn"
+                    type="submit"
+                    class="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-[var(--color-accent)] px-8 py-3.5 font-semibold text-white transition-all hover:bg-[var(--color-accent-hover)] disabled:opacity-70"
+                  >
+
+                    <span id="btn-text"
+                      class="relative z-10 flex items-center gap-2">
+
+                      Send Message
+
+                      <svg id="btn-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2.5">
+                        <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+
+                    </span>
+
+                  </button>
+                </div>
+              </div>
+
+              <!-- SUCCESS -->
+              <div
+                id="success-state"
+                class="absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 translate-y-8 scale-95 pointer-events-none transition-all duration-700"
+              >
+
+                <div class="mb-8 flex h-24 w-24 items-center justify-center rounded-full bg-[var(--color-background)] border border-[var(--color-border)] shadow-lg">
+
+                  <svg class="checkmark h-12 w-12 text-[var(--color-accent)]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 52 52">
+
+                    <circle class="checkmark__circle"
+                      cx="26"
+                      cy="26"
+                      r="25"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2" />
+
+                    <path class="checkmark__check"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                  </svg>
+
+                </div>
+
+                <h3 class="text-3xl font-extrabold text-[var(--color-text)] mb-4">
+                  Message Securely Transmitted
+                </h3>
+
+                <p class="text-lg text-[var(--color-text-muted)] mb-10 max-w-md mx-auto">
+                  Our engineering team will review your project details and respond within 24-48 hours.
+                </p>
+
+                <button
+                  type="button"
+                  id="reset-btn"
+                  class="rounded-full border border-[var(--color-border)] bg-[var(--color-background)] px-8 py-3 font-semibold text-[var(--color-text)] transition-all hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+                >
+                  Send another message
+                </button>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener('astro:page-load', () => {
+
+    if (window.contactFormInitialized) return;
+    window.contactFormInitialized = true;
+
+    const form = document.getElementById('contact-form');
+
+    if (!form) return;
+
+    const formFields = document.getElementById('form-fields');
+    const successState = document.getElementById('success-state');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const resetBtn = document.getElementById('reset-btn');
+    const checkmark = document.querySelector('.checkmark');
+
+    const originalBtnHTML = btnText.innerHTML;
+
+    form.addEventListener('submit', async (e) => {
+
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+
+      btnText.innerHTML = `
+        Encrypting...
+        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24">
+          <circle class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"></circle>
+
+          <path class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373
+            0 12h4zm2 5.291A7.962 7.962 0 014
+            12H0c0 3.042 1.135 5.824 3
+            7.938l3-2.647z"></path>
+        </svg>
+      `;
+
+      try {
+
+        const formData = new FormData(form);
+
+        const data = Object.fromEntries(formData);
+
+        if (data.details.trim().length < 10) {
+          throw new Error('Please provide more project details.');
+        }
+
+        const response = await fetch('/api/contact', {
+
+          method: 'POST',
+
+          headers: {
+            'Content-Type': 'application/json',
+          },
+
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(
+            result.message || 'Failed to send message'
+          );
+        }
+
+        formFields.classList.remove(
+          'opacity-100',
+          'translate-y-0',
+          'scale-100'
+        );
+
+        formFields.classList.add(
+          'opacity-0',
+          '-translate-y-8',
+          'scale-95',
+          'pointer-events-none'
+        );
+
+        setTimeout(() => {
+
+          successState.classList.remove(
+            'opacity-0',
+            'translate-y-8',
+            'scale-95',
+            'pointer-events-none'
+          );
+
+          successState.classList.add(
+            'opacity-100',
+            'translate-y-0',
+            'scale-100',
+            'pointer-events-auto'
+          );
+
+          checkmark.classList.remove('animate-draw');
+
+          void checkmark.offsetWidth;
+
+          checkmark.classList.add('animate-draw');
+
+        }, 300);
+
+      } catch (error) {
+
+        console.error(error);
+
+        btnText.innerHTML = `Failed — Retry`;
+
+        submitBtn.classList.add('bg-red-500');
+
+        setTimeout(() => {
+
+          submitBtn.classList.remove('bg-red-500');
+
+          btnText.innerHTML = originalBtnHTML;
+
+        }, 2500);
+
+      } finally {
+
+        submitBtn.disabled = false;
+
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+
+      form.reset();
+
+      successState.classList.remove(
+        'opacity-100',
+        'translate-y-0',
+        'scale-100',
+        'pointer-events-auto'
+      );
+
+      successState.classList.add(
+        'opacity-0',
+        'translate-y-8',
+        'scale-95',
+        'pointer-events-none'
+      );
+
+      setTimeout(() => {
+
+        formFields.classList.remove(
+          'opacity-0',
+          '-translate-y-8',
+          'scale-95',
+          'pointer-events-none'
+        );
+
+        formFields.classList.add(
+          'opacity-100',
+          'translate-y-0',
+          'scale-100'
+        );
+
+        submitBtn.disabled = false;
+
+        submitBtn.classList.remove('bg-red-500');
+
+        btnText.innerHTML = originalBtnHTML;
+
+        checkmark.classList.remove('animate-draw');
+
+      }, 400);
+    });
+  });
+</script>
+
+<style>
+  .checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+  }
+
+  .checkmark__check {
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+  }
+
+  .animate-draw .checkmark__circle {
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  }
+
+  .animate-draw .checkmark__check {
+    animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+  }
+
+  @keyframes stroke {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>

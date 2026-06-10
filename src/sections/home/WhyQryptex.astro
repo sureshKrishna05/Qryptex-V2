@@ -1,0 +1,68 @@
+---
+import Container from "../../components/ui/Container.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+
+const features = [
+  {
+    title: "Security-Driven",
+    description: "Security is integrated into every phase of planning, development, and deployment."
+  },
+  {
+    title: "Business-Focused",
+    description: "Technology decisions are aligned with measurable business outcomes and long-term value."
+  },
+  {
+    title: "Built To Scale",
+    description: "Solutions engineered to support future growth, performance, and resilience."
+  }
+];
+---
+
+<section
+  aria-label="Why Choose Us"
+  class="relative py-32 lg:py-40"
+>
+
+  <Container class="relative z-10">
+
+    <SectionHeading
+      eyebrow="WHY QRYPTEX"
+      title="Built on Security. Designed for Growth."
+      description="We combine security, engineering excellence, and business understanding to deliver technology solutions that create lasting impact."
+    />
+
+    <ul
+      class="mt-20 grid gap-8 lg:grid-cols-3"
+      aria-label="Core advantages"
+    >
+      {
+        features.map((feature) => (
+          <li class="group relative flex flex-col overflow-hidden rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)]/80 p-8 shadow-sm backdrop-blur-xl transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 hover:border-[var(--color-accent)]/40 hover:bg-[var(--color-surface)] hover:shadow-2xl hover:shadow-[var(--color-accent-glow)] sm:p-10 transform-gpu">
+
+            <div
+              aria-hidden="true"
+              class="absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-[1200ms] ease-out group-hover:translate-x-full dark:via-white/5 transform-gpu"
+            ></div>
+
+            <div
+              aria-hidden="true"
+              class="relative z-10 mb-8 h-1 w-12 overflow-hidden rounded-full bg-[var(--color-border)] transform-gpu"
+            >
+              <div class="h-full w-1/3 rounded-full bg-[var(--color-accent)] transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-full group-hover:shadow-[0_0_8px_var(--color-accent)] transform-gpu"></div>
+            </div>
+
+            <h3 class="relative z-10 text-2xl font-extrabold tracking-tight text-[var(--color-text)] transition-colors duration-500 group-hover:text-[var(--color-accent)]">
+              {feature.title}
+            </h3>
+
+            <p class="relative z-10 mt-4 text-base leading-relaxed text-[var(--color-text-muted)] transition-colors duration-500 group-hover:text-[var(--color-text)]">
+              {feature.description}
+            </p>
+
+          </li>
+        ))
+      }
+    </ul>
+
+  </Container>
+</section>

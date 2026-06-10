@@ -1,0 +1,216 @@
+---
+import { siteConfig } from "../../data/site";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+}
+
+const {
+  title = siteConfig.name,
+  description = siteConfig.description,
+  image = "/og-image.jpg",
+  type = "website",
+} = Astro.props;
+
+const fullTitle =
+  title === siteConfig.name
+    ? siteConfig.name
+    : `${title} | ${siteConfig.name}`;
+
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site ?? siteConfig.url
+);
+
+const socialImageURL = new URL(
+  image,
+  Astro.site ?? siteConfig.url
+);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+
+  name: siteConfig.name,
+  url: siteConfig.url,
+
+  logo: `${siteConfig.url}/favicon.svg`,
+
+  description,
+
+  image: socialImageURL.href,
+
+  email: "contact@qryptex.in",
+
+  telephone: "+91-7598576406",
+
+  foundingDate: "2026",
+
+  areaServed: "Worldwide",
+
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+91-7598576406",
+    contactType: "customer support",
+    availableLanguage: ["English"],
+  },
+
+  sameAs: [
+    "https://www.linkedin.com/company/qryptex-in/",
+    "https://www.instagram.com/qryptex.in/",
+  ],
+};
+---
+
+<meta charset="UTF-8" />
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1"
+/>
+
+<title>{fullTitle}</title>
+
+<!-- Primary SEO -->
+<meta
+  name="description"
+  content={description}
+/>
+
+<meta
+  name="keywords"
+  content="Cybersecurity, AI Solutions, Software Engineering, DevSecOps, Cloud Security, Artificial Intelligence, Custom Software Development, Technology Consulting, Qryptex"
+/>
+
+<meta
+  name="author"
+  content="Qryptex"
+/>
+
+<meta
+  name="generator"
+  content={Astro.generator}
+/>
+
+<meta
+  name="robots"
+  content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+/>
+
+<!-- Canonical -->
+<link
+  rel="canonical"
+  href={canonicalURL}
+/>
+
+<!-- Sitemap -->
+<link
+  rel="sitemap"
+  href="/sitemap-index.xml"
+/>
+
+<!-- Manifest -->
+<link
+  rel="manifest"
+  href="/site.webmanifest"
+/>
+
+<!-- Favicons -->
+<link
+  rel="icon"
+  href="/favicon.ico"
+  sizes="any"
+/>
+
+<link
+  rel="icon"
+  href="/favicon.svg"
+  type="image/svg+xml"
+/>
+
+<!-- Open Graph -->
+<meta
+  property="og:locale"
+  content="en_US"
+/>
+
+<meta
+  property="og:type"
+  content={type}
+/>
+
+<meta
+  property="og:site_name"
+  content={siteConfig.name}
+/>
+
+<meta
+  property="og:title"
+  content={fullTitle}
+/>
+
+<meta
+  property="og:description"
+  content={description}
+/>
+
+<meta
+  property="og:url"
+  content={canonicalURL}
+/>
+
+<meta
+  property="og:image"
+  content={socialImageURL}
+/>
+
+<meta
+  property="og:image:alt"
+  content={description}
+/>
+
+<!-- Twitter / X -->
+<meta
+  name="twitter:card"
+  content="summary_large_image"
+/>
+
+<meta
+  name="twitter:title"
+  content={fullTitle}
+/>
+
+<meta
+  name="twitter:description"
+  content={description}
+/>
+
+<meta
+  name="twitter:image"
+  content={socialImageURL}
+/>
+
+<meta
+  name="twitter:image:alt"
+  content={description}
+/>
+
+<!-- Browser UI -->
+<meta
+  name="theme-color"
+  content="#b8860b"
+/>
+
+<meta
+  name="color-scheme"
+  content="light dark"
+/>
+
+<!-- Structured Data -->
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

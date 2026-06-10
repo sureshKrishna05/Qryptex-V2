@@ -1,0 +1,8 @@
+{
+  "name": "Qryptex",
+  "short_name": "Qryptex",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f5ef",
+  "theme_color": "#b8860b"
+}

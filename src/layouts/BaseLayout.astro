@@ -1,0 +1,66 @@
+---
+import "../styles/global.css";
+import { ClientRouter } from "astro:transitions"; 
+
+import SEO from "../components/seo/SEO.astro";
+import Navbar from "../components/navigation/Navbar.astro";
+import Footer from "../components/navigation/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title,
+  description,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="overflow-x-hidden scroll-smooth">
+  <head>
+    <SEO
+      title={title}
+      description={description}
+    />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <ClientRouter />
+    
+    <script is:inline>
+      const applyTheme = () => {
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      };
+
+      // 1. Run immediately on initial page load
+      applyTheme();
+
+      // 2. Run again every time Astro swaps to a new page via ClientRouter
+      document.addEventListener('astro:after-swap', applyTheme);
+    </script>
+  </head>
+
+  <body
+    class="min-h-screen bg-[var(--color-background)] text-[var(--color-text)] antialiased overflow-x-hidden selection:bg-[var(--color-accent)] selection:text-white"
+  >
+    <div class="relative flex min-h-screen flex-col overflow-x-hidden">
+      <Navbar />
+
+      <main class="flex-grow">
+        <slot />
+      </main>
+
+      <Footer />
+    </div>
+  </body>
+</html>

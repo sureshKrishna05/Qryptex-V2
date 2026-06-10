@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Point Google directly to the Astro-generated sitemap
+Sitemap: https://qryptex.in/sitemap-index.xml

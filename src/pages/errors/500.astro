@@ -1,0 +1,79 @@
+---
+// FIXED: Notice the ../../ to correctly point up two folder levels
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/ui/Container.astro";
+import Button from "../../components/ui/Button.astro";
+---
+
+<BaseLayout
+  title="500: System Fault | Qryptex"
+  description="An internal server error has occurred."
+>
+  <section class="section-light relative flex min-h-[80vh] items-center justify-center overflow-hidden py-32">
+    
+    <div 
+      class="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[600px] w-full max-w-3xl -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-accent-glow)] blur-[120px] transition-opacity duration-1000 opacity-70" 
+      aria-hidden="true"
+    ></div>
+
+    <Container>
+      <div class="group relative mx-auto max-w-3xl text-center">
+
+        <div class="relative overflow-hidden rounded-[3rem] border border-[var(--color-border)] bg-[var(--color-surface)]/80 px-6 py-20 shadow-2xl shadow-[var(--color-accent-glow)] backdrop-blur-2xl sm:px-16 sm:py-24 transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-2xl hover:shadow-[var(--color-accent-glow)] transform-gpu">
+          
+          <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-accent-glow)] to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100 pointer-events-none"></div>
+
+          <div class="relative z-10 flex flex-col items-center">
+            
+            <div class="relative mb-10 flex h-24 w-24 items-center justify-center">
+              <span class="absolute inline-flex h-full w-full animate-ping-once rounded-full border border-[var(--color-text-muted)] opacity-20 duration-[2000ms]"></span>
+              
+              <div class="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--color-background)] border border-[var(--color-border)] text-[var(--color-text-muted)] shadow-inner transition-colors duration-500 group-hover:text-[var(--color-accent)] transform-gpu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-15-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3" />
+                </svg>
+              </div>
+            </div>
+
+            <span class="text-sm font-bold uppercase tracking-widest text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)] transition-colors duration-300">
+              Error 500
+            </span>
+
+            <h1 class="mt-4 text-5xl font-extrabold tracking-tighter text-[var(--color-text)] md:text-7xl">
+              System Fault <br />
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-text-muted)] to-[var(--color-text)] group-hover:from-[var(--color-accent)] group-hover:to-[var(--color-accent-hover)] transition-all duration-500">
+                Detected.
+              </span>
+            </h1>
+
+            <p class="mx-auto mt-6 max-w-lg text-lg leading-relaxed text-[var(--color-text-muted)]">
+              An unexpected process failure occurred on our servers. Our engineering team has been automatically notified and is deploying a fix.
+            </p>
+
+            <div class="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button href="/" class="w-full sm:w-auto shadow-lg shadow-[var(--color-accent-glow)] group transform-gpu transition-all hover:scale-105">
+                Return to Base
+              </Button>
+
+              <Button href="/contact" variant="secondary" class="w-full sm:w-auto transform-gpu transition-all hover:scale-105">
+                Contact Support
+              </Button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<style>
+  @keyframes ping-once {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    50% { opacity: 0.3; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+  .animate-ping-once {
+    animation: ping-once 2s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+</style>

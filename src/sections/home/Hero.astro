@@ -1,0 +1,145 @@
+---
+import Container from "../../components/ui/Container.astro";
+import Button from "../../components/ui/Button.astro";
+
+// 1. Import the Image component and the asset
+import { Image } from "astro:assets";
+import shieldImg from "../../assets/Shield.png"; 
+---
+
+<section 
+  aria-labelledby="hero-heading"
+  class="section-light relative overflow-hidden pt-24 pb-32 lg:pt-32 lg:pb-40 bg-[var(--color-background)]"
+>
+  <Container>
+    <div class="grid min-h-[60vh] items-center gap-12 lg:grid-cols-12 lg:gap-8">
+
+      <div class="relative z-10 flex flex-col items-start lg:col-span-6 lg:pr-8 xl:pr-12">
+        
+        <h1 
+          id="hero-heading"
+          class="text-5xl font-extrabold tracking-tighter text-[var(--color-text)] sm:text-6xl md:text-7xl lg:text-[4.5rem] xl:text-[5rem] lg:leading-[1.05] transform-gpu isolate"
+        >
+          Secure Systems.
+          <br aria-hidden="true" />
+          <span class="inline-block pb-2 -mb-2 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)]">
+            Intelligent Solutions.
+          </span>
+          <br aria-hidden="true" />
+          Built To Scale.
+        </h1>
+
+        <p class="mt-8 max-w-xl text-lg leading-relaxed text-[var(--color-text-muted)] sm:text-xl">
+          We engineer secure, AI-driven, and highly scalable technology solutions. We partner with enterprises to drive innovation without compromising on security or performance.
+        </p>
+
+        <div class="relative z-20 mt-12 flex flex-wrap items-center gap-5">
+          <Button 
+            href="/#services" 
+            class="group relative overflow-hidden rounded-full bg-[var(--color-text)] px-8 py-4 font-semibold text-[var(--color-surface)] shadow-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_var(--color-accent-glow)] flex items-center justify-center border border-transparent transform-gpu"
+          >
+            <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+            
+            <span class="relative z-10 font-semibold">Explore Services</span>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" class="relative z-10 h-4 w-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+            
+          </Button>
+
+          <Button 
+            href="/contact" 
+            variant="secondary" 
+            class="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)]/50 px-8 py-4 font-semibold text-[var(--color-text)] backdrop-blur-md transition-all duration-300 hover:border-[var(--color-accent)] hover:bg-[var(--color-surface)] hover:text-[var(--color-accent)] transform-gpu"
+          >
+            Let's Talk
+          </Button>
+        </div>
+
+      </div>
+
+      <div class="relative hidden w-full items-center justify-center lg:col-span-6 lg:flex">
+
+        <div class="relative w-full aspect-square max-w-[550px] flex items-center justify-center">
+          
+          <div 
+            class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
+            aria-hidden="true"
+          >
+            
+            <div class="orbit-ring-slow absolute w-[92%] h-[92%] rounded-full">
+              <div class="absolute inset-0 rounded-full border border-[var(--color-text-muted)] opacity-25 dark:opacity-30 shadow-[0_0_15px_rgba(0,0,0,0.05)]"></div>
+              
+              <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_25px_6px_var(--color-accent)] ring-[3px] ring-[var(--color-background)]">
+                 <div class="absolute inset-0 rounded-full bg-[var(--color-accent)] animate-ping opacity-60"></div>
+              </div>
+
+              <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[var(--color-text-muted)] opacity-80 shadow-[0_0_12px_2px_var(--color-text-muted)] ring-2 ring-[var(--color-background)]"></div>
+            </div>
+
+            <div class="orbit-ring-medium absolute w-[70%] h-[70%] rounded-full">
+              <div class="absolute inset-0 rounded-full border-2 border-dashed border-[var(--color-text-muted)] opacity-20 dark:opacity-40"></div>
+              
+              <div class="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-3.5 h-3.5 rounded-full bg-[var(--color-background)] border-[2.5px] border-[var(--color-accent)] shadow-[0_0_15px_3px_var(--color-accent)]"></div>
+              
+              <div class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[var(--color-text)] shadow-[0_0_15px_3px_var(--color-text)] ring-2 ring-[var(--color-background)] opacity-90"></div>
+
+              <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--color-accent-hover)] shadow-[0_0_10px_2px_var(--color-accent-hover)] ring-1 ring-[var(--color-background)]"></div>
+            </div>
+
+            <div class="orbit-ring-fast absolute w-[48%] h-[48%] rounded-full">
+              <div class="absolute inset-0 rounded-full border-2 border-[var(--color-accent)] opacity-20 dark:opacity-30 drop-shadow-[0_0_8px_var(--color-accent-glow)]"></div>
+              
+              <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-3 h-3 rounded-full bg-[var(--color-accent)] shadow-[0_0_15px_3px_var(--color-accent)] ring-2 ring-[var(--color-background)]"></div>
+
+              <div class="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[var(--color-text-muted)] opacity-90"></div>
+            </div>
+
+          </div>
+          
+          <Image 
+            src={shieldImg} 
+            alt="Secure Systems Shield" 
+            width={800}
+            height={800}
+            class="relative z-10 w-[70%] h-auto object-contain pointer-events-none transform-gpu drop-shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_20px_40px_rgba(255,255,255,0.05)]"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+
+        </div>
+
+      </div>
+
+    </div>
+  </Container>
+</section>
+
+<style>
+  @keyframes spin-cw {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes spin-ccw {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+
+  .orbit-ring-slow {
+    animation: spin-cw 35s linear infinite;
+    will-change: transform;
+  }
+
+  .orbit-ring-medium {
+    animation: spin-ccw 25s linear infinite;
+    will-change: transform;
+  }
+
+  .orbit-ring-fast {
+    animation: spin-cw 15s linear infinite;
+    will-change: transform;
+  }
+</style>

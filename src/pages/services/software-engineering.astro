@@ -1,0 +1,198 @@
+---
+import ServiceLayout from "../../layouts/ServiceLayout.astro";
+import Container from "../../components/ui/Container.astro";
+
+// --- Data Objects for cleaner markup ---
+
+const capabilities = [
+  {
+    title: "Full-Stack Web Applications",
+    description: "Responsive, high-performance web applications built with modern frameworks like React, Next.js, and Vue to deliver flawless user experiences.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" /></svg>`
+  },
+  {
+    title: "Enterprise Business Platforms",
+    description: "Custom ERPs, CRMs, and internal tools engineered to streamline complex business operations and unify siloed data across your organization.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12.25M15 3h3.75c.621 0 1.125.504 1.125 1.125v16.75" /></svg>`
+  },
+  {
+    title: "Cloud-Native Architecture",
+    description: "Scalable, resilient backend infrastructure utilizing microservices, Docker, Kubernetes, and serverless computing on AWS, Azure, or GCP.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" /></svg>`
+  },
+  {
+    title: "API & Integration Systems",
+    description: "Secure REST and GraphQL APIs designed to connect disparate systems, enable third-party integrations, and power multi-platform applications.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>`
+  },
+  {
+    title: "Legacy Modernization",
+    description: "Breathe new life into aging systems. We safely migrate, refactor, and modernize monolithic codebases to modern, agile tech stacks.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" /></svg>`
+  },
+  {
+    title: "Secure-by-Design Backend",
+    description: "We bring our cybersecurity DNA into every line of code, ensuring strict data validation, encryption, and protection against OWASP top 10 threats.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>`
+  }
+];
+
+const principles = [
+  {
+    title: "Scalable By Default",
+    desc: "Architecture designed to handle 10x growth without requiring costly, ground-up rewrites."
+  },
+  {
+    title: "Zero Technical Debt",
+    desc: "Clean, documented, and maintainable code that keeps your engineering team moving fast."
+  },
+  {
+    title: "Uncompromising Security",
+    desc: "As a security-first firm, vulnerability prevention is hardcoded into our development lifecycle."
+  }
+];
+---
+
+<ServiceLayout
+  title="Custom Software Engineering & Cloud Architecture"
+  badge="SOFTWARE ENGINEERING"
+  description="Build highly scalable, resilient software solutions. Our engineers specialize in cloud-native architecture, custom APIs, and legacy system modernization."
+>
+
+  <!-- OVERVIEW / HERO SECTION -->
+  <section class="relative overflow-hidden section-light pt-32 pb-24">
+    <!-- Ambient Top Glow -->
+    <div class="pointer-events-none absolute left-1/2 top-0 -z-10 h-[500px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-[var(--color-accent-glow)] blur-[120px]" aria-hidden="true"></div>
+
+    <Container>
+      <div class="mx-auto max-w-4xl text-center">
+        
+        <span class="inline-flex items-center gap-2 rounded-full border border-[var(--color-accent)] bg-[var(--color-accent-glow)] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--color-accent)] shadow-sm">
+          <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-75"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]"></span></span>
+          Precision Engineering
+        </span>
+
+        <h2 class="mt-8 text-4xl font-extrabold tracking-tight text-[var(--color-text)] md:text-6xl lg:leading-[1.1]">
+          Software built to scale, <br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)]">not just to ship.</span>
+        </h2>
+
+        <div class="mx-auto mt-8 max-w-2xl space-y-6 text-lg leading-relaxed text-[var(--color-text-muted)]">
+          <p>
+            Great software is more than just checking off a list of features. It requires thoughtful architecture, relentless maintainability, and enterprise-grade security from day one.
+          </p>
+          <p>
+            We don't just write code; we engineer resilient technology platforms that eliminate technical debt, streamline operations, and empower your business to grow without friction.
+          </p>
+        </div>
+
+      </div>
+    </Container>
+  </section>
+
+  <!-- CAPABILITIES SECTION -->
+  <section class="relative z-10 section-light pb-32">
+    <Container>
+      <div class="mb-16 text-center">
+        <h2 class="text-3xl font-bold text-[var(--color-text)] md:text-5xl">
+          Core Engineering Capabilities
+        </h2>
+        <p class="mt-4 text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
+          From complex backend systems to intuitive user interfaces, our full-stack expertise covers the entire modern software ecosystem.
+        </p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {capabilities.map((item) => (
+          <article class="group relative overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)] hover:shadow-xl">
+            <!-- Subtle hover gradient inside card -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-accent-glow)] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+            
+            <div class="relative z-10">
+              <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-background)] text-[var(--color-accent)] ring-1 ring-[var(--color-border)] transition-colors group-hover:bg-[var(--color-accent)] group-hover:text-white">
+                <Fragment set:html={item.icon} />
+              </div>
+              <h3 class="text-xl font-bold text-[var(--color-text)]">{item.title}</h3>
+              <p class="mt-3 leading-relaxed text-[var(--color-text-muted)] text-sm">{item.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- ARCHITECTURE PRINCIPLES (DARK SECTION) -->
+  <section class="section-dark py-32 relative overflow-hidden">
+    <!-- Dark Mode Glow -->
+    <div class="absolute right-0 top-1/2 -z-10 h-[600px] w-[600px] -translate-y-1/2 translate-x-1/3 rounded-full bg-[var(--color-accent)] opacity-10 blur-[150px]"></div>
+
+    <Container>
+      <div class="grid gap-16 lg:grid-cols-12 lg:items-center">
+        
+        <div class="lg:col-span-5">
+          <span class="text-sm font-bold uppercase tracking-widest text-[var(--color-accent)]">The Qryptex Standard</span>
+          <h2 class="mt-4 text-4xl font-bold text-white md:text-5xl leading-tight">
+            Engineered For Long-Term Success.
+          </h2>
+          <p class="mt-6 text-lg text-slate-300 leading-relaxed">
+            We reject the "move fast and break things" mentality when it applies to enterprise code. Our architecture principles ensure your software remains an asset, not a liability.
+          </p>
+        </div>
+
+        <div class="lg:col-span-7 grid gap-6 sm:grid-cols-1">
+          {principles.map((principle) => (
+            <article class="flex items-start gap-6 rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/20">
+              <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)]/20 text-[var(--color-accent)]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-white">{principle.title}</h3>
+                <p class="mt-2 text-slate-300">{principle.desc}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+      </div>
+    </Container>
+  </section>
+
+  <!-- DEVELOPMENT PROCESS SECTION -->
+  <section class="section-light py-32">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="text-sm font-bold uppercase tracking-widest text-[var(--color-accent)]">Methodology</span>
+        <h2 class="mt-4 text-3xl font-bold text-[var(--color-text)] md:text-5xl">
+          From Concept to Code
+        </h2>
+        <p class="mt-4 text-lg text-[var(--color-text-muted)]">A transparent, agile, and rigorous development process that keeps your project on time, on budget, and built to spec.</p>
+      </div>
+
+      <div class="mt-20 relative">
+        <!-- Connecting Line for desktop -->
+        <div class="hidden lg:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-30"></div>
+        
+        <div class="grid gap-6 md:grid-cols-3 lg:grid-cols-5">
+          {[
+            { name: "Discovery", desc: "Requirements gathering and strategic roadmap creation." },
+            { name: "Architecture", desc: "System design, tech stack selection, and database modeling." },
+            { name: "Development", desc: "Agile sprints, daily commits, and clean code generation." },
+            { name: "QA & Security", desc: "Automated testing, manual QA, and strict security audits." },
+            { name: "Deployment", desc: "CI/CD pipelines, containerization, and smooth cloud rollout." }
+          ].map((step, index) => (
+            <article class="relative pt-8 text-center z-10 group">
+              <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--color-surface)] text-2xl font-bold text-[var(--color-accent)] ring-2 ring-[var(--color-border)] transition-all group-hover:ring-[var(--color-accent)] shadow-sm">
+                0{index + 1}
+              </div>
+              <h3 class="text-xl font-bold text-[var(--color-text)]">{step.name}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-[var(--color-text-muted)]">{step.desc}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+</ServiceLayout>

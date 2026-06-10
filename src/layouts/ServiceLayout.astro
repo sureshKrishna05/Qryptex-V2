@@ -1,0 +1,83 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Container from "../components/ui/Container.astro";
+import Button from "../components/ui/Button.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  badge: string;
+}
+
+const {
+  title,
+  description,
+  badge,
+} = Astro.props;
+---
+<BaseLayout
+  title={title}
+  description={description}
+>
+  <section class="section-dark py-32">
+    <Container>
+
+      <div class="mx-auto max-w-5xl text-center">
+
+        <span
+          class="inline-flex rounded-full border border-white/10 px-4 py-2 text-sm font-medium text-[var(--color-accent)]"
+        >
+          {badge}
+        </span>
+
+        <h1
+          class="mt-8 text-5xl font-bold leading-tight text-white md:text-7xl"
+        >
+          {title}
+        </h1>
+
+        <p
+          class="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-slate-300"
+        >
+          {description}
+        </p>
+
+      </div>
+
+    </Container>
+  </section>
+
+  <slot />
+
+  <section class="section-light py-32">
+    <Container>
+
+      <div
+        class="mx-auto max-w-4xl rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-surface)] p-12 text-center shadow-xl lg:p-20"
+      >
+
+        <h2
+          class="text-4xl font-bold text-[var(--color-text)] md:text-6xl"
+        >
+          Let's Build Something Secure
+        </h2>
+
+        <p
+          class="mx-auto mt-6 max-w-2xl text-lg text-[var(--color-text-muted)]"
+        >
+          Partner with Qryptex to create secure, scalable,
+          and future-ready technology solutions.
+        </p>
+
+        <div class="mt-10">
+          <Button href="/contact">
+            Schedule A Consultation
+          </Button>
+        </div>
+
+      </div>
+
+    </Container>
+  </section>
+
+</BaseLayout>

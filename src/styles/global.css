@@ -1,0 +1,158 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ===================================== */
+/* LIGHT THEME (DEFAULT) */
+/* ===================================== */
+
+:root {
+  --color-background: #f8f5ef;
+  --color-surface: #ffffff;
+
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+
+  --color-accent: #b8860b;
+  --color-accent-hover: #9a7209;
+  --color-accent-glow: rgba(184, 134, 11, 0.12);
+
+  --color-border: rgba(15, 23, 42, 0.08);
+}
+
+/* ===================================== */
+/* DARK THEME */
+/* ===================================== */
+
+.dark {
+  --color-background: #0b1120;
+  --color-surface: #111827;
+
+  --color-text: #f8fafc;
+  --color-text-muted: #94a3b8;
+
+  --color-accent: #d4a017;
+  --color-accent-hover: #e0b43d;
+  --color-accent-glow: rgba(212, 160, 23, 0.18);
+
+  --color-border: rgba(255, 255, 255, 0.08);
+}
+
+/* ===================================== */
+/* GLOBAL HTML & BODY */
+/* ===================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* THE ANTI-FLICKER LOCK:
+  Targeting all structural elements ensures the Navbar, Footer, and Sections
+  do not transition at different speeds.
+*/
+body, header, footer, main, section, nav {
+  background-color: var(--color-background);
+  color: var(--color-text);
+
+  transition:
+    background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  /* Prevents horizontal scroll from large glowing blur elements */
+  overflow-x: hidden;
+}
+
+/* ===================================== */
+/* SECTION HELPERS */
+/* ===================================== */
+
+.section-light {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.section-dark {
+  background: linear-gradient(
+    180deg,
+    #08101f 0%,
+    #0b1120 100%
+  );
+  color: white;
+}
+
+/* ===================================== */
+/* FORMS */
+/* ===================================== */
+
+input,
+textarea {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ===================================== */
+/* INTERACTIONS & TRANSITIONS */
+/* ===================================== */
+
+a,
+button,
+input,
+textarea {
+  /* Slightly smoothed interaction defaults to match the premium feel */
+  transition:
+    color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===================================== */
+/* ACCESSIBILITY */
+/* ===================================== */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ===================================== */
+/* TEXT SELECTION */
+/* ===================================== */
+
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* ===================================== */
+/* CUSTOM SCROLLBAR */
+/* ===================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent-hover);
+}
