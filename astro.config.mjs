@@ -1,13 +1,27 @@
 import { defineConfig } from "astro/config";
+
+import vercel from "@astrojs/vercel";
+
 import tailwindcss from "@tailwindcss/vite";
+
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
+
   site: "https://qryptex.in",
 
-  integrations: [sitemap()],
+  output: "server",
+
+  adapter: vercel(),
+
+  integrations: [
+    sitemap(),
+  ],
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+    ],
   },
+
 });
