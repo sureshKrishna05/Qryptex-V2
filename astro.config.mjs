@@ -12,7 +12,7 @@ export default defineConfig({
 
   output: "server",
 
-  adapter: vercel(),
+  adapter: vercel({imageService: true},),
 
   integrations: [
     sitemap(),
