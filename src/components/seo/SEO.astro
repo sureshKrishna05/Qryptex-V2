@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from "../../data/site";
+import qryptexLogo from "../../assets/qryptex.jpeg";
 
 export interface Props {
   title?: string;
@@ -37,7 +38,7 @@ const schema = {
   name: siteConfig.name,
   url: siteConfig.url,
 
-  logo: `${siteConfig.url}/favicon.svg`,
+  logo: qryptexLogo.src,
 
   description,
 
@@ -74,7 +75,6 @@ const schema = {
 
 <title>{fullTitle}</title>
 
-<!-- Primary SEO -->
 <meta
   name="description"
   content={description}
@@ -100,38 +100,38 @@ const schema = {
   content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
 />
 
-<!-- Canonical -->
 <link
   rel="canonical"
   href={canonicalURL}
 />
 
-<!-- Sitemap -->
 <link
   rel="sitemap"
   href="/sitemap-index.xml"
 />
 
-<!-- Manifest -->
 <link
   rel="manifest"
   href="/site.webmanifest"
 />
 
-<!-- Favicons -->
+<!-- Favicon -->
 <link
   rel="icon"
-  href="/favicon.ico"
-  sizes="any"
+  type="image/jpeg"
+  href={qryptexLogo.src}
 />
 
 <link
-  rel="icon"
-  href="/favicon.svg"
-  type="image/svg+xml"
+  rel="shortcut icon"
+  href={qryptexLogo.src}
 />
 
-<!-- Open Graph -->
+<link
+  rel="apple-touch-icon"
+  href={qryptexLogo.src}
+/>
+
 <meta
   property="og:locale"
   content="en_US"
@@ -172,7 +172,6 @@ const schema = {
   content={description}
 />
 
-<!-- Twitter / X -->
 <meta
   name="twitter:card"
   content="summary_large_image"
@@ -198,7 +197,6 @@ const schema = {
   content={description}
 />
 
-<!-- Browser UI -->
 <meta
   name="theme-color"
   content="#b8860b"
@@ -209,7 +207,6 @@ const schema = {
   content="light dark"
 />
 
-<!-- Structured Data -->
 <script
   type="application/ld+json"
   set:html={JSON.stringify(schema)}
