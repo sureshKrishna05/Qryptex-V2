@@ -12,10 +12,15 @@ if (!siteConfig.flashNews?.enabled) {
 }
 
 const {
-  title = siteConfig.flashNews.title || "Partner With Next-Gen Quantum Innovators",
-  subtitle = "BDU × Qiskit Fallfest 2026 • Official Host & Partner Call",
-  description = siteConfig.flashNews.description || "Bharathidasan University is officially hosting Qiskit Fallfest 2026—convening India's brightest engineering minds, researchers, and developers. Position your brand at the forefront of quantum computing and elite talent recruitment.",
-  ctaText = siteConfig.flashNews.ctaText || "Claim Sponsorship Prospectus",
+  title =
+    siteConfig.flashNews.title || "Become an Official Industry Partner",
+  subtitle =
+    "IBM Qiskit Fall Fest 2026\nHosted at Bharathidasan University",
+  description =
+    siteConfig.flashNews.description ||
+    "Support one of India's official IBM Qiskit Fall Fest 2026 events. Engage with exceptional student talent, researchers, and future quantum technology leaders through strategic sponsorship and industry partnership opportunities.",
+  ctaText =
+    siteConfig.flashNews.ctaText || "Become a Sponsor",
   href = siteConfig.flashNews.href || "/contact",
   delayMs = siteConfig.flashNews.delayMs || 800,
 } = Astro.props;
@@ -55,7 +60,7 @@ const {
           <span class="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]"></span>
         </span>
         <span class="text-xs font-extrabold uppercase tracking-widest text-[var(--color-text-muted)]">
-          Official Partnership Announcement
+          IBM QISKIT FALL FEST 2026 OFFICIAL SPONSORSHIP PROGRAM
         </span>
       </div>
 
@@ -118,11 +123,11 @@ const {
 
       <div class="min-w-0 flex-1 sm:border-l sm:border-[var(--color-border)] sm:pl-5">
         <p class="text-xs font-extrabold uppercase tracking-widest text-[var(--color-text)] sm:text-sm">
-          Official Host & Partner
+          Official EVENT PARTNERSHIP
         </p>
-        <p class="mt-0.5 text-xs font-medium text-[var(--color-text-muted)] sm:text-sm">
-          {subtitle}
-        </p>
+      <p class="mt-0.5 whitespace-pre-line text-xs font-medium text-[var(--color-text-muted)] sm:text-sm">
+        {subtitle}
+      </p>
       </div>
     </div>
 
@@ -144,10 +149,11 @@ const {
 
     {/* Action Bar */}
     <div class="mt-10 flex flex-col gap-6 border-t border-[var(--color-border)] pt-8 sm:flex-row sm:items-center sm:justify-between">
-      {/* Bottom Metadata Tag */}
+      {/* Bottom Metadata Tag */}  
+   
       <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-        <span class="h-2 w-2 rounded-full bg-[var(--color-accent)]" aria-hidden="true"></span>
-        <span>Bharathidasan University • Q3 2026</span>
+        {/* <span class="h-2 w-2 rounded-full bg-[var(--color-accent)]" aria-hidden="true"></span>*/}
+        <span> </span>
       </div>
 
       {/* Tactile Interactive Buttons */}
