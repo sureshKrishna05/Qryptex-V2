@@ -7,11 +7,11 @@ export const siteConfig = {
 
   flashNews: {
     enabled: true,
-    badge: "SPONSORSHIP OPEN",
-    title: "Qiskit Fallfest 2026 at Bharathidasan University",
+    badge: "EXCLUSIVE SPONSORSHIP OPPORTUNITY",
+    title: "Partner With Next-Gen Quantum Innovators",
     description:
-      "We are organizing Qiskit Fallfest 2026 at Bharathidasan University! Partner with us to empower next-generation quantum computing and technical innovation. We are now actively welcoming event sponsors.",
-    ctaText: "Become a Sponsor",
+      "We are hosting Qiskit Fallfest 2026 at Bharathidasan University—bringing together top student engineers, researchers, and developers. Grab the opportunity to position your brand at the forefront of quantum computing and talent acquisition.",
+    ctaText: "Claim Sponsorship Prospectus",
     href: "/contact",
     delayMs: 800,
   },
