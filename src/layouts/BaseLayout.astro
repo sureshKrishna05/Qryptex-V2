@@ -3,6 +3,7 @@ import "../styles/global.css";
 import { ClientRouter } from "astro:transitions"; 
 
 import SEO from "../components/seo/SEO.astro";
+import FlashNews from "../components/navigation/FlashNews.astro";
 import Navbar from "../components/navigation/Navbar.astro";
 import Footer from "../components/navigation/Footer.astro";
 
@@ -54,6 +55,8 @@ const {
     class="min-h-screen bg-[var(--color-background)] text-[var(--color-text)] antialiased overflow-x-hidden selection:bg-[var(--color-accent)] selection:text-white"
   >
     <div class="relative flex min-h-screen flex-col overflow-x-hidden">
+      {/* Pop-out Advertisement Modal (Appears once per reload/fresh visit) */}
+      <FlashNews />
       <Navbar />
 
       <main class="flex-grow">
