@@ -26,25 +26,26 @@ const {
 } = Astro.props;
 ---
 
-<aside
+{/* CHANGED: Used 'invisible' instead of 'hidden' to prevent GPU layout recalculation flicker */}
+<div
   id="flash-news-popup"
   role="dialog"
   aria-modal="true"
   aria-labelledby="flash-popup-title"
   aria-describedby="flash-popup-description"
-  class="fixed inset-0 z-[100] hidden items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu sm:p-6 md:p-10"
+  class="fixed inset-0 z-[100] flex invisible items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu sm:p-6 md:p-10"
 >
   {/* Glass Backdrop */}
   <div
     id="flash-popup-backdrop"
-    class="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-600 ease-[cubic-bezier(0.16,1,0.3,1)]"
+    class="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
     aria-hidden="true"
   ></div>
 
   {/* Modal Card */}
   <div
     id="flash-popup-card"
-    class="relative z-10 w-full max-w-3xl translate-y-8 scale-90 overflow-hidden rounded-[2.5rem] border border-[var(--color-border)] bg-[var(--color-surface)]/95 p-6 shadow-2xl shadow-black/50 backdrop-blur-2xl transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] sm:p-10 md:p-12 transform-gpu will-change-transform"
+    class="relative z-10 w-full max-w-3xl translate-y-8 scale-90 overflow-hidden rounded-[2.5rem] border border-[var(--color-border)] bg-[var(--color-surface)]/95 p-6 shadow-2xl shadow-black/50 backdrop-blur-2xl transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:p-10 md:p-12 transform-gpu will-change-transform"
   >
     {/* Top Gold Accent Border */}
     <div
@@ -192,7 +193,7 @@ const {
       </div>
     </div>
   </div>
-</aside>
+</div>
 
 <script is:inline define:vars={{ delayMs }}>
   function initFlashPopup() {
@@ -204,9 +205,8 @@ const {
 
     if (!modal || !backdrop || !card || !closeBtn || !dismissTextBtn) return;
 
-    // Show only once per browser reload/fresh session
     if (window.__flashPopupShownThisLoad) {
-      modal.style.display = "none";
+      modal.classList.add("invisible");
       return;
     }
 
@@ -217,21 +217,14 @@ const {
       window.__flashPopupShownThisLoad = true;
 
       previousActiveElement = document.activeElement;
-      modal.style.display = "flex";
+      
+      // Reveal visibility without layout shifts
+      modal.classList.remove("invisible", "pointer-events-none", "opacity-0");
+      modal.classList.add("opacity-100");
+      card.classList.remove("translate-y-8", "scale-90");
+      card.classList.add("translate-y-0", "scale-100");
 
-      // Double rAF ensures zero layout-shift before CSS transitions trigger
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          modal.classList.remove("pointer-events-none", "opacity-0");
-          modal.classList.add("opacity-100");
-          card.classList.remove("translate-y-8", "scale-90");
-          card.classList.add("translate-y-0", "scale-100");
-
-          // Manage focus for keyboard/screen-reader accessibility
-          closeBtn.focus();
-        });
-      });
-
+      closeBtn.focus();
       document.body.style.overflow = "hidden";
     };
 
@@ -242,13 +235,12 @@ const {
       card.classList.add("translate-y-8", "scale-90");
       document.body.style.overflow = "";
 
-      // Restore focus to the element that was active before the dialog opened
       if (previousActiveElement && typeof previousActiveElement.focus === "function") {
         previousActiveElement.focus();
       }
 
       setTimeout(() => {
-        modal.style.display = "none";
+        modal.classList.add("invisible");
       }, 700);
     };
 
