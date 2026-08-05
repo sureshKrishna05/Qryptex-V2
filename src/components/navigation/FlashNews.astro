@@ -1,0 +1,188 @@
+---
+// src/components/navigation/FlashNews.astro
+import { siteConfig } from "../../data/site";
+
+if (!siteConfig.flashNews.enabled) {
+  return;
+}
+
+const {
+  badge = siteConfig.flashNews.badge,
+  title = siteConfig.flashNews.title,
+  description = siteConfig.flashNews.description,
+  ctaText = siteConfig.flashNews.ctaText,
+  href = siteConfig.flashNews.href,
+  delayMs = siteConfig.flashNews.delayMs,
+} = Astro.props;
+---
+
+<div
+  id="flash-news-popup"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="flash-popup-title"
+  class="fixed inset-0 z-[100] hidden items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu"
+>
+  {/* Darkened Glass Backdrop */}
+  <div
+    id="flash-popup-backdrop"
+    class="absolute inset-0 bg-[var(--color-background)]/75 backdrop-blur-md transition-opacity duration-500"
+    aria-hidden="true"
+  ></div>
+
+  {/* Modal Advert Card */}
+  <div
+    id="flash-popup-card"
+    class="relative z-10 w-full max-w-lg scale-95 overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-2xl shadow-[var(--color-accent-glow)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] sm:p-8 transform-gpu"
+  >
+    {/* Decorative Top Accent Glow */}
+    <div
+      class="pointer-events-none absolute -top-24 left-1/2 -z-10 h-48 w-full -translate-x-1/2 rounded-full bg-[var(--color-accent-glow)] blur-3xl"
+      aria-hidden="true"
+    ></div>
+
+    {/* Header & Dismiss Button */}
+    <div class="flex items-center justify-between gap-4">
+      <span class="inline-flex items-center gap-2 rounded-full border border-[var(--color-accent)]/30 bg-[var(--color-accent-glow)] px-3 py-1 text-xs font-bold uppercase tracking-widest text-[var(--color-accent)]">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-75"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]"></span>
+        </span>
+        {badge}
+      </span>
+
+      <button
+        id="close-flash-popup"
+        type="button"
+        aria-label="Close advertisement"
+        class="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-background)] text-[var(--color-text-muted)] transition-all duration-200 hover:border-[var(--color-accent)] hover:text-[var(--color-text)] active:scale-95 transform-gpu"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="h-4 w-4"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    {/* Title & Body */}
+    <div class="mt-6 text-left">
+      <h3
+        id="flash-popup-title"
+        class="text-2xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-3xl"
+      >
+        {title}
+      </h3>
+      <p class="mt-3 text-sm leading-relaxed text-[var(--color-text-muted)] sm:text-base">
+        {description}
+      </p>
+    </div>
+
+    {/* Actions */}
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
+      <button
+        id="dismiss-flash-text"
+        type="button"
+        class="rounded-xl px-5 py-3 text-sm font-semibold text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-text)]"
+      >
+        Maybe Later
+      </button>
+
+      <a
+        href={href}
+        class="group inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--color-accent)] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-[var(--color-accent-glow)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-accent-hover)] active:scale-95 transform-gpu"
+      >
+        <span>{ctaText}</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+          class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 transform-gpu"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ delayMs }}>
+  function initFlashPopup() {
+    const modal = document.getElementById("flash-news-popup");
+    const backdrop = document.getElementById("flash-popup-backdrop");
+    const card = document.getElementById("flash-popup-card");
+    const closeBtn = document.getElementById("close-flash-popup");
+    const dismissTextBtn = document.getElementById("dismiss-flash-text");
+
+    if (!modal || !backdrop || !card || !closeBtn || !dismissTextBtn) return;
+
+    // 1. If we already showed the popup during this page load session, keep it hidden
+    if (window.__flashPopupShownThisLoad) {
+      modal.style.display = "none";
+      return;
+    }
+
+    const openModal = () => {
+      // Prevent double triggering
+      if (window.__flashPopupShownThisLoad) return;
+      window.__flashPopupShownThisLoad = true;
+
+      modal.style.display = "flex";
+      requestAnimationFrame(() => {
+        modal.classList.remove("pointer-events-none");
+        modal.classList.add("opacity-100");
+        card.classList.remove("scale-95");
+        card.classList.add("scale-100");
+      });
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeModal = () => {
+      modal.classList.remove("opacity-100");
+      modal.classList.add("opacity-0", "pointer-events-none");
+      card.classList.remove("scale-100");
+      card.classList.add("scale-95");
+      document.body.style.overflow = "";
+
+      setTimeout(() => {
+        modal.style.display = "none";
+      }, 500);
+    };
+
+    // Clone nodes to wipe old event listeners cleanly during Astro transitions
+    const newCloseBtn = closeBtn.cloneNode(true);
+    closeBtn.parentNode?.replaceChild(newCloseBtn, closeBtn);
+
+    const newDismissTextBtn = dismissTextBtn.cloneNode(true);
+    dismissTextBtn.parentNode?.replaceChild(newDismissTextBtn, dismissTextBtn);
+
+    const newBackdrop = backdrop.cloneNode(true);
+    backdrop.parentNode?.replaceChild(newBackdrop, backdrop);
+
+    newCloseBtn.addEventListener("click", closeModal);
+    newDismissTextBtn.addEventListener("click", closeModal);
+    newBackdrop.addEventListener("click", closeModal);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.classList.contains("pointer-events-none")) {
+        closeModal();
+      }
+    });
+
+    // 2. Trigger open on initial visit or hard reload after the delay
+    const timer = setTimeout(openModal, delayMs);
+    return () => clearTimeout(timer);
+  }
+
+  // Run on initial load and handle Astro page-load events
+  initFlashPopup();
+  document.addEventListener("astro:page-load", initFlashPopup);
+</script>
