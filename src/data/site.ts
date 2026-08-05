@@ -7,11 +7,11 @@ export const siteConfig = {
 
   flashNews: {
     enabled: true,
-    badge: "EXCLUSIVE SPONSORSHIP OPPORTUNITY",
-    title: "Partner With Next-Gen Quantum Innovators",
+    badge: "IBM QISKIT FALL FEST 2026",
+    title: "Power the Future of Quantum Computing",
     description:
-      "We are hosting Qiskit Fallfest 2026 at Bharathidasan University—bringing together top student engineers, researchers, and developers. Grab the opportunity to position your brand at the forefront of quantum computing and talent acquisition.",
-    ctaText: "Claim Sponsorship Prospectus",
+      "Join Qryptex in supporting the official IBM Qiskit Fall Fest 2026 at Bharathidasan University. Showcase your brand, connect with exceptional student talent, and engage with researchers and developers driving the future of quantum technologies.",
+    ctaText: "Become an Industry Partner",
     href: "/contact",
     delayMs: 800,
   },

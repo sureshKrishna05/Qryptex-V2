@@ -19,7 +19,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" class="overflow-x-hidden scroll-smooth">
+<html lang="en" class="preload overflow-x-hidden scroll-smooth">
   <head>
     <SEO
       title={title}
@@ -43,10 +43,21 @@ const {
         }
       };
 
-      // 1. Run immediately on initial page load
+      const removePreload = () => {
+        requestAnimationFrame(() => {
+          document.documentElement.classList.remove('preload');
+        });
+      };
+
+      // 1. Apply theme instantly before DOM painting
       applyTheme();
 
-      // 2. Run again every time Astro swaps to a new page via ClientRouter
+      // 2. Remove preload guard on initial load AND after every Astro page navigation
+      window.addEventListener('DOMContentLoaded', removePreload);
+      document.addEventListener('astro:page-load', removePreload);
+      document.addEventListener('astro:after-swap', removePreload);
+
+      // 3. Re-apply theme instantly during Astro ClientRouter page swaps
       document.addEventListener('astro:after-swap', applyTheme);
     </script>
   </head>
@@ -55,7 +66,6 @@ const {
     class="min-h-screen bg-[var(--color-background)] text-[var(--color-text)] antialiased overflow-x-hidden selection:bg-[var(--color-accent)] selection:text-white"
   >
     <div class="relative flex min-h-screen flex-col overflow-x-hidden">
-      {/* Pop-out Advertisement Modal (Appears once per reload/fresh visit) */}
       <FlashNews />
       <Navbar />
 
