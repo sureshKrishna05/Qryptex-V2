@@ -21,12 +21,14 @@ const {
     "Support one of India's official IBM Qiskit Fall Fest 2026 events. Engage with exceptional student talent, researchers, and future quantum technology leaders through strategic sponsorship and industry partnership opportunities.",
   ctaText =
     siteConfig.flashNews.ctaText || "Become a Sponsor",
-  href = siteConfig.flashNews.href || "/contact",
+  href =
+    siteConfig.flashNews.href ||
+    "https://wa.me/917598576406?text=Hello%2C%20I%20am%20interested%20in%20partnering%20with%20IBM%20Qiskit%20Fall%20Fest%202026%20at%20Bharathidasan%20University.",
   delayMs = siteConfig.flashNews.delayMs || 800,
 } = Astro.props;
 ---
 
-{/* CHANGED: Used 'invisible' instead of 'hidden' to prevent GPU layout recalculation flicker */}
+{/* Used 'invisible' instead of 'hidden' to prevent GPU layout recalculation flicker */}
 <div
   id="flash-news-popup"
   role="dialog"
@@ -126,9 +128,9 @@ const {
         <p class="text-xs font-extrabold uppercase tracking-widest text-[var(--color-text)] sm:text-sm">
           Official EVENT PARTNERSHIP
         </p>
-      <p class="mt-0.5 whitespace-pre-line text-xs font-medium text-[var(--color-text-muted)] sm:text-sm">
-        {subtitle}
-      </p>
+        <p class="mt-0.5 whitespace-pre-line text-xs font-medium text-[var(--color-text-muted)] sm:text-sm">
+          {subtitle}
+        </p>
       </div>
     </div>
 
@@ -150,11 +152,18 @@ const {
 
     {/* Action Bar */}
     <div class="mt-10 flex flex-col gap-6 border-t border-[var(--color-border)] pt-8 sm:flex-row sm:items-center sm:justify-between">
-      {/* Bottom Metadata Tag */}  
-   
-      <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-        {/* <span class="h-2 w-2 rounded-full bg-[var(--color-accent)]" aria-hidden="true"></span>*/}
-        <span> </span>
+      {/* Clickable WhatsApp Phone Number Button */}
+      <div class="flex items-center">
+        <a
+          href="https://wa.me/917598576406?text=Hello%2C%20I%20am%20interested%20in%20partnering%20with%20IBM%20Qiskit%20Fall%20Fest%202026%20at%20Bharathidasan%20University."
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat on WhatsApp with +91 75985 76406"
+          class="group/phone inline-flex items-center gap-2.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] px-4 py-2.5 font-mono text-xs font-bold text-[var(--color-text)] shadow-xs transition-all duration-300 hover:border-emerald-500 hover:text-emerald-500 active:scale-95"
+        >
+          <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
+          <span>+91 75985 76406</span>
+        </a>
       </div>
 
       {/* Tactile Interactive Buttons */}
@@ -169,6 +178,8 @@ const {
 
         <a
           href={href}
+          target="_blank"
+          rel="noopener noreferrer"
           class="group relative inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-[var(--color-accent)] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[var(--color-accent-glow)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:bg-[var(--color-accent-hover)] hover:shadow-xl hover:shadow-[var(--color-accent-glow)] active:scale-95 sm:w-auto transform-gpu"
         >
           <span
@@ -205,7 +216,8 @@ const {
 
     if (!modal || !backdrop || !card || !closeBtn || !dismissTextBtn) return;
 
-    if (window.__flashPopupShownThisLoad) {
+    // Preserves dismissal across all Astro page navigations (/contact, /about, etc.)
+    if (sessionStorage.getItem("qryptex_flash_shown") === "true") {
       modal.classList.add("invisible");
       return;
     }
@@ -213,8 +225,8 @@ const {
     let previousActiveElement = null;
 
     const openModal = () => {
-      if (window.__flashPopupShownThisLoad) return;
-      window.__flashPopupShownThisLoad = true;
+      if (sessionStorage.getItem("qryptex_flash_shown") === "true") return;
+      sessionStorage.setItem("qryptex_flash_shown", "true");
 
       previousActiveElement = document.activeElement;
       
@@ -229,6 +241,8 @@ const {
     };
 
     const closeModal = () => {
+      sessionStorage.setItem("qryptex_flash_shown", "true");
+
       modal.classList.remove("opacity-100");
       modal.classList.add("opacity-0", "pointer-events-none");
       card.classList.remove("translate-y-0", "scale-100");
