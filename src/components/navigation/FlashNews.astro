@@ -20,7 +20,7 @@ const {
     siteConfig.flashNews.description ||
     "Support one of India's official IBM Qiskit Fall Fest 2026 events. Engage with exceptional student talent, researchers, and future quantum technology leaders through strategic sponsorship and industry partnership opportunities.",
   ctaText =
-    siteConfig.flashNews.ctaText || "Become a Sponsor",
+    siteConfig.flashNews.ctaText || "Become an Industry Partner",
   href =
     siteConfig.flashNews.href ||
     "whatsapp://send?phone=917598576406&text=Hello%2C%20I%20am%20interested%20in%20partnering%20with%20IBM%20Qiskit%20Fall%20Fest%202026%20at%20Bharathidasan%20University.",
@@ -152,18 +152,9 @@ const {
 
     {/* Action Bar */}
     <div class="mt-10 flex flex-col gap-6 border-t border-[var(--color-border)] pt-8 sm:flex-row sm:items-center sm:justify-between">
-      {/* Clickable WhatsApp Phone Number Button */}
-      <div class="flex items-center">
-        <a
-          href="https://wa.me/917598576406?text=Hello%2C%20I%20am%20interested%20in%20partnering%20with%20IBM%20Qiskit%20Fall%20Fest%202026%20at%20Bharathidasan%20University."
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Chat on WhatsApp with +91 75985 76406"
-          class="group/phone inline-flex items-center gap-2.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] px-4 py-2.5 font-mono text-xs font-bold text-[var(--color-text)] shadow-xs transition-all duration-300 hover:border-emerald-500 hover:text-emerald-500 active:scale-95"
-        >
-          <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
-          <span>+91 75985 76406</span>
-        </a>
+      {/* Empty Left Indicator Area for Layout Balance */}
+      <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+        <span> </span>
       </div>
 
       {/* Tactile Interactive Buttons */}
@@ -176,16 +167,29 @@ const {
           Maybe Later
         </button>
 
+        {/* Primary CTA Button -> Directs to WhatsApp */}
         <a
           href={href}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Become an Industry Partner via WhatsApp"
           class="group relative inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-[var(--color-accent)] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[var(--color-accent-glow)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:bg-[var(--color-accent-hover)] hover:shadow-xl hover:shadow-[var(--color-accent-glow)] active:scale-95 sm:w-auto transform-gpu"
         >
           <span
             class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
             aria-hidden="true"
           ></span>
+
+          {/* WhatsApp Logo SVG Icon */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="relative z-10 h-5 w-5 shrink-0"
+            aria-hidden="true"
+          >
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.404.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.942 1.183.636.571 1.17.769 1.336.856.166.087.265.072.364-.043.098-.116.422-.491.534-.659.112-.168.224-.141.378-.087.154.055.979.462 1.148.548.169.087.282.13.324.202.043.072.043.419-.101.824zm-3.393-10.416c-5.414 0-9.813 4.399-9.813 9.813 0 1.93.568 3.733 1.554 5.253l-1.654 6.037 6.182-1.624c1.472.871 3.167 1.385 4.966 1.385 5.414 0 9.813-4.399 9.813-9.813 0-5.414-4.399-9.813-9.813-9.813z" />
+          </svg>
 
           <span class="relative z-10">{ctaText}</span>
           <svg
@@ -235,10 +239,13 @@ const {
       // Reveal visibility without layout shifts
       modal.classList.remove("invisible", "pointer-events-none", "opacity-0");
       modal.classList.add("opacity-100");
-      card.classList.remove("translate-y-8", "scale-90");
-      card.classList.add("translate-y-0", "scale-100");
 
-      closeBtn.focus();
+      requestAnimationFrame(() => {
+        card.classList.remove("translate-y-8", "scale-90");
+        card.classList.add("translate-y-0", "scale-100");
+        closeBtn.focus();
+      });
+
       document.body.style.overflow = "hidden";
     };
 
