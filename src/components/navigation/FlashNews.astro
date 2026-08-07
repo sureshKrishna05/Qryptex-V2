@@ -23,7 +23,7 @@ const {
     siteConfig.flashNews.ctaText || "Become a Sponsor",
   href =
     siteConfig.flashNews.href ||
-    "https://wa.me/917598576406?text=Hello%2C%20I%20am%20interested%20in%20partnering%20with%20IBM%20Qiskit%20Fall%20Fest%202026%20at%20Bharathidasan%20University.",
+    "whatsapp://send?phone=917598576406&text=Hello%2C%20I%20am%20interested%20in%20partnering%20with%20IBM%20Qiskit%20Fall%20Fest%202026%20at%20Bharathidasan%20University.",
   delayMs = siteConfig.flashNews.delayMs || 800,
 } = Astro.props;
 ---
@@ -216,8 +216,10 @@ const {
 
     if (!modal || !backdrop || !card || !closeBtn || !dismissTextBtn) return;
 
-    // Preserves dismissal across all Astro page navigations (/contact, /about, etc.)
-    if (sessionStorage.getItem("qryptex_flash_shown") === "true") {
+    // IN-MEMORY WINDOW CHECK:
+    // Resets on every browser reload/refresh (F5 / Cmd+R) so the modal appears again,
+    // but prevents spamming re-pops during internal Astro ClientRouter page navigation.
+    if (window.__qryptex_flash_shown === true) {
       modal.classList.add("invisible");
       return;
     }
@@ -225,8 +227,8 @@ const {
     let previousActiveElement = null;
 
     const openModal = () => {
-      if (sessionStorage.getItem("qryptex_flash_shown") === "true") return;
-      sessionStorage.setItem("qryptex_flash_shown", "true");
+      if (window.__qryptex_flash_shown === true) return;
+      window.__qryptex_flash_shown = true;
 
       previousActiveElement = document.activeElement;
       
@@ -241,7 +243,7 @@ const {
     };
 
     const closeModal = () => {
-      sessionStorage.setItem("qryptex_flash_shown", "true");
+      window.__qryptex_flash_shown = true;
 
       modal.classList.remove("opacity-100");
       modal.classList.add("opacity-0", "pointer-events-none");
