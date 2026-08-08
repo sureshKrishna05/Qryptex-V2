@@ -12,20 +12,17 @@ if (!siteConfig.flashNews?.enabled) {
 }
 
 const {
-  title =
-    siteConfig.flashNews.title || "Become an Official Industry Partner",
-  subtitle =
-    "IBM Qiskit Fall Fest 2026\nHosted at Bharathidasan University",
+  title = siteConfig.flashNews.title || "Become an Official Industry Partner",
+  subtitle = "IBM Qiskit Fall Fest 2026\nHosted at Bharathidasan University",
   description =
     siteConfig.flashNews.description ||
     "Support one of India's official IBM Qiskit Fall Fest 2026 events. Engage with exceptional student talent, researchers, and future quantum technology leaders through strategic sponsorship and industry partnership opportunities.",
-  ctaText =
-    siteConfig.flashNews.ctaText || "Become an Industry Partner",
-  // We leave href empty here because the JavaScript below will smartly inject the right one!
+  ctaText = siteConfig.flashNews.ctaText || "Become an Industry Partner",
   delayMs = siteConfig.flashNews.delayMs || 800,
 } = Astro.props;
 ---
 
+{/* ROOT MODAL: Uses 'invisible' GPU rendering to prevent initial page-load flicker */}
 <div
   id="flash-news-popup"
   role="dialog"
@@ -34,25 +31,30 @@ const {
   aria-describedby="flash-popup-description"
   class="fixed inset-0 z-[100] flex invisible items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu sm:p-6 md:p-10"
 >
+  {/* Glass Backdrop */}
   <div
     id="flash-popup-backdrop"
     class="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
     aria-hidden="true"
   ></div>
 
-  <div
+  {/* Modal Card - Semantic Container */}
+  <section
     id="flash-popup-card"
     class="relative z-10 w-full max-w-3xl translate-y-8 scale-90 overflow-hidden rounded-[2.5rem] border border-[var(--color-border)] bg-[var(--color-surface)]/95 p-6 shadow-2xl shadow-black/50 backdrop-blur-2xl transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:p-10 md:p-12 transform-gpu will-change-transform"
   >
+    {/* Top Gold Accent Border */}
     <div
       class="absolute left-0 top-0 h-1.5 w-full bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent opacity-90"
       aria-hidden="true"
     ></div>
 
-    <div class="flex items-center justify-between gap-4">
+    {/* ================= HEADER ================= */}
+    <header class="flex items-center justify-between gap-4">
       <div class="flex items-center gap-2.5">
+        {/* Optimized Pulsing Dot (Fixes non-composited animation warning) */}
         <span class="relative flex h-2 w-2" aria-hidden="true">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-75"></span>
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-75 transform-gpu will-change-transform will-change-[opacity]"></span>
           <span class="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]"></span>
         </span>
         <span class="text-xs font-extrabold uppercase tracking-widest text-[var(--color-text-muted)]">
@@ -78,71 +80,84 @@ const {
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
         </svg>
       </button>
-    </div>
+    </header>
 
-    <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-      <div class="flex items-center gap-3.5">
-        <div class="group/logo flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] p-2 shadow-sm transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-[var(--color-accent)]/60 hover:shadow-md sm:h-20 sm:w-20 transform-gpu">
-          <Image
-            src={bduLogo}
-            alt="Bharathidasan University Logo"
-            width={100}
-            height={100}
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-            class="h-full w-full object-contain transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/logo:scale-105 transform-gpu"
-          />
+    {/* ================= MAIN CONTENT ================= */}
+    <main>
+      {/* CO-BRANDED PARTNERSHIP LOGO SHOWCASE */}
+      <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+        <div class="flex items-center gap-3.5">
+          {/* BDU Logo Container (Optimized with lazy load & WebP) */}
+          <div class="group/logo flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] p-2 shadow-sm transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-[var(--color-accent)]/60 hover:shadow-md sm:h-20 sm:w-20 transform-gpu">
+            <Image
+              src={bduLogo}
+              alt="Bharathidasan University Logo"
+              width={100}
+              height={100}
+              format="webp"
+              quality={80}
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full object-contain transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/logo:scale-105 transform-gpu"
+            />
+          </div>
+
+          {/* Partnership Multiplier Icon */}
+          <span class="text-xl font-light text-[var(--color-text-muted)] opacity-50" aria-hidden="true">
+            ×
+          </span>
+
+          {/* Qiskit Fallfest Badge Container (Optimized with lazy load & WebP) */}
+          <div class="group/logo flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] p-2 shadow-sm transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-[var(--color-accent)]/60 hover:shadow-md sm:h-20 sm:w-20 transform-gpu">
+            <Image
+              src={qiskitLogo}
+              alt="Qiskit Fallfest 2026 Badge"
+              width={100}
+              height={100}
+              format="webp"
+              quality={80}
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full object-contain transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/logo:scale-105 transform-gpu"
+            />
+          </div>
         </div>
 
-        <span class="text-xl font-light text-[var(--color-text-muted)] opacity-50" aria-hidden="true">
-          ×
-        </span>
-
-        <div class="group/logo flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] p-2 shadow-sm transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-[var(--color-accent)]/60 hover:shadow-md sm:h-20 sm:w-20 transform-gpu">
-          <Image
-            src={qiskitLogo}
-            alt="Qiskit Fallfest 2026 Badge"
-            width={100}
-            height={100}
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-            class="h-full w-full object-contain transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/logo:scale-105 transform-gpu"
-          />
+        <div class="min-w-0 flex-1 sm:border-l sm:border-[var(--color-border)] sm:pl-5">
+          <p class="text-xs font-extrabold uppercase tracking-widest text-[var(--color-text)] sm:text-sm">
+            Official EVENT PARTNERSHIP
+          </p>
+          <p class="mt-0.5 whitespace-pre-line text-xs font-medium text-[var(--color-text-muted)] sm:text-sm">
+            {subtitle}
+          </p>
         </div>
       </div>
 
-      <div class="min-w-0 flex-1 sm:border-l sm:border-[var(--color-border)] sm:pl-5">
-        <p class="text-xs font-extrabold uppercase tracking-widest text-[var(--color-text)] sm:text-sm">
-          Official EVENT PARTNERSHIP
-        </p>
-        <p class="mt-0.5 whitespace-pre-line text-xs font-medium text-[var(--color-text-muted)] sm:text-sm">
-          {subtitle}
+      {/* Title & Copy */}
+      <div class="mt-8 text-left">
+        <h2
+          id="flash-popup-title"
+          class="text-3xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-4xl md:text-5xl md:leading-[1.1]"
+        >
+          {title}
+        </h2>
+        <p
+          id="flash-popup-description"
+          class="mt-5 text-base leading-relaxed text-[var(--color-text-muted)] sm:text-lg md:text-xl md:leading-relaxed"
+        >
+          {description}
         </p>
       </div>
-    </div>
+    </main>
 
-    <div class="mt-8 text-left">
-      <h2
-        id="flash-popup-title"
-        class="text-3xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-4xl md:text-5xl md:leading-[1.1]"
-      >
-        {title}
-      </h2>
-      <p
-        id="flash-popup-description"
-        class="mt-5 text-base leading-relaxed text-[var(--color-text-muted)] sm:text-lg md:text-xl md:leading-relaxed"
-      >
-        {description}
-      </p>
-    </div>
-
-    <div class="mt-10 flex flex-col gap-6 border-t border-[var(--color-border)] pt-8 sm:flex-row sm:items-center sm:justify-between">
-      <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+    {/* ================= FOOTER / ACTION BAR ================= */}
+    <footer class="mt-10 flex flex-col gap-6 border-t border-[var(--color-border)] pt-8 sm:flex-row sm:items-center sm:justify-between">
+      {/* Empty Left Indicator Area for Layout Balance */}
+      <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]" aria-hidden="true">
         <span> </span>
       </div>
 
+      {/* Tactile Interactive Buttons */}
       <div class="flex flex-col-reverse gap-3 sm:flex-row sm:items-center">
         <button
           id="dismiss-flash-text"
@@ -152,12 +167,12 @@ const {
           Maybe Later
         </button>
 
-        {/* Added ID 'whatsapp-cta-btn' so the script below can dynamically inject the correct device URL */}
+        {/* Primary CTA Button -> Injected dynamically via script */}
         <a
           id="whatsapp-cta-btn"
           href="#"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer preload"
           aria-label="Become an Industry Partner via WhatsApp"
           class="group relative inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-[var(--color-accent)] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[var(--color-accent-glow)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:bg-[var(--color-accent-hover)] hover:shadow-xl hover:shadow-[var(--color-accent-glow)] active:scale-95 sm:w-auto transform-gpu"
         >
@@ -166,6 +181,7 @@ const {
             aria-hidden="true"
           ></span>
 
+          {/* WhatsApp Logo SVG Icon */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -191,10 +207,11 @@ const {
           </svg>
         </a>
       </div>
-    </div>
-  </div>
+    </footer>
+  </section>
 </div>
 
+{/* ================= MODAL LOGIC ================= */}
 <script is:inline define:vars={{ delayMs }}>
   function initFlashPopup() {
     const modal = document.getElementById("flash-news-popup");
@@ -206,20 +223,21 @@ const {
 
     if (!modal || !backdrop || !card || !closeBtn || !dismissTextBtn) return;
 
-    // SMART DEVICE ROUTER FOR WHATSAPP
+    // --- SMART DEVICE ROUTER FOR WHATSAPP ---
     if (whatsappBtn) {
       const waPhone = "917598576406";
       const waText = encodeURIComponent("Hello, I am interested in partnering with IBM Qiskit Fall Fest 2026 at Bharathidasan University.");
       
-      // Detect if user is on a mobile device
+      // Smart detection: Bypasses xdg-open issues on Desktop Linux/Windows by forcing web client
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
       
-      // Desktop goes straight to web.whatsapp.com, Mobile goes to api.whatsapp.com (triggers native app)
       whatsappBtn.href = isMobile 
         ? `https://api.whatsapp.com/send?phone=${waPhone}&text=${waText}`
         : `https://web.whatsapp.com/send?phone=${waPhone}&text=${waText}`;
     }
 
+    // --- REFRESH-AWARE DISPLAY LOGIC ---
+    // Resets on page reload (F5) but persists across Astro's internal view transitions
     if (window.__qryptex_flash_shown === true) {
       modal.classList.add("invisible");
       return;
@@ -231,8 +249,10 @@ const {
       if (window.__qryptex_flash_shown === true) return;
       window.__qryptex_flash_shown = true;
 
+      // Trap focus
       previousActiveElement = document.activeElement;
       
+      // Reveal visibility without layout shifts
       modal.classList.remove("invisible", "pointer-events-none", "opacity-0");
       modal.classList.add("opacity-100");
 
@@ -254,6 +274,7 @@ const {
       card.classList.add("translate-y-8", "scale-90");
       document.body.style.overflow = "";
 
+      // Safely restore focus
       if (previousActiveElement && typeof previousActiveElement.focus === "function") {
         previousActiveElement.focus();
       }
@@ -263,6 +284,8 @@ const {
       }, 700);
     };
 
+    // --- EVENT LISTENER CLEANUP & ATTACHMENT ---
+    // Clone nodes to prevent duplicate listeners during Astro View Transitions
     const newCloseBtn = closeBtn.cloneNode(true);
     closeBtn.parentNode?.replaceChild(newCloseBtn, closeBtn);
 
@@ -286,6 +309,7 @@ const {
     return () => clearTimeout(timer);
   }
 
+  // Initialize on hard load and subsequent Astro page transitions
   initFlashPopup();
   document.addEventListener("astro:page-load", initFlashPopup);
 </script>
