@@ -19,6 +19,8 @@ const pastEvents = [
     galleryCount: 10
   }
 ];
+const galleryFiles = import.meta.glob<{ default: ImageMetadata }>('../assets/events/gallery/*.{jpeg,jpg,png}', { eager: true });
+const galleryImages = Object.values(galleryFiles).map(file => file.default);
 ---
 
 <BaseLayout title="Events & Training | Qryptex" description="View our past cybersecurity workshops and book a technical training session for your institution.">
@@ -108,7 +110,38 @@ const pastEvents = [
       </div>
     </Container>
   </section>
+  {/* EVENT GALLERY */}
+  {galleryImages.length > 0 && (
+    <section class="section-light py-20 bg-[var(--color-surface)] border-y border-[var(--color-border)]">
+      <Container>
+        <div class="mb-12 text-center max-w-2xl mx-auto">
+          <span class="text-sm font-bold uppercase tracking-widest text-[var(--color-accent)]">Gallery</span>
+          <h2 class="mt-3 text-3xl font-bold text-[var(--color-text)] md:text-4xl">
+            Event Highlights
+          </h2>
+          <p class="mt-4 text-lg text-[var(--color-text-muted)]">
+            Glimpses from our recent technical workshops and quantum computing sessions.
+          </p>
+        </div>
 
+        <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+          {galleryImages.map((img, index) => (
+            <div class="group relative break-inside-avoid overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] shadow-sm hover:shadow-xl transition-all duration-300">
+              <Image 
+                src={img} 
+                alt={`Qryptex Event Highlight ${index + 1}`} 
+                width={600} 
+                format="webp"
+                quality={80}
+                class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )}
   {/* UPCOMING / HOST A WORKSHOP CTA */}
   <section class="section-dark py-24 relative overflow-hidden border-t border-[var(--color-border)]">
     <Container>
