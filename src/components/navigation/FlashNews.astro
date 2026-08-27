@@ -18,6 +18,7 @@ const {
     siteConfig.flashNews.description ||
     "Support one of India's official IBM Qiskit Fall Fest 2026 events. Engage with exceptional student talent, researchers, and future quantum technology leaders through strategic sponsorship and industry partnership opportunities.",
   ctaText = siteConfig.flashNews.ctaText || "Become an Industry Partner",
+  href = siteConfig.flashNews.href || "https://qiskit-fallfest-website.vercel.app/",
   delayMs = siteConfig.flashNews.delayMs || 800,
 } = Astro.props;
 ---
@@ -148,30 +149,19 @@ const {
           Maybe Later
         </button>
 
-        {/* Primary CTA Button -> Injected dynamically via script */}
+        {/* Primary CTA Button */}
         <a
-          id="whatsapp-cta-btn"
-          href="#"
+          id="external-cta-btn"
+          href={href}
           target="_blank"
           rel="noopener noreferrer preload"
-          aria-label="Become an Industry Partner via WhatsApp"
+          aria-label="View Event Details"
           class="group relative inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-[var(--color-accent)] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[var(--color-accent-glow)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:bg-[var(--color-accent-hover)] hover:shadow-xl hover:shadow-[var(--color-accent-glow)] active:scale-95 sm:w-auto transform-gpu"
         >
           <span
             class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
             aria-hidden="true"
           ></span>
-
-          {/* WhatsApp Logo SVG Icon */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="relative z-10 h-5 w-5 shrink-0"
-            aria-hidden="true"
-          >
-            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.404.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.942 1.183.636.571 1.17.769 1.336.856.166.087.265.072.364-.043.098-.116.422-.491.534-.659.112-.168.224-.141.378-.087.154.055.979.462 1.148.548.169.087.282.13.324.202.043.072.043.419-.101.824zm-3.393-10.416c-5.414 0-9.813 4.399-9.813 9.813 0 1.93.568 3.733 1.554 5.253l-1.654 6.037 6.182-1.624c1.472.871 3.167 1.385 4.966 1.385 5.414 0 9.813-4.399 9.813-9.813 0-5.414-4.399-9.813-9.813-9.813z" />
-          </svg>
 
           <span class="relative z-10">{ctaText}</span>
           <svg
@@ -200,22 +190,8 @@ const {
     const card = document.getElementById("flash-popup-card");
     const closeBtn = document.getElementById("close-flash-popup");
     const dismissTextBtn = document.getElementById("dismiss-flash-text");
-    const whatsappBtn = document.getElementById("whatsapp-cta-btn");
 
     if (!modal || !backdrop || !card || !closeBtn || !dismissTextBtn) return;
-
-    // --- SMART DEVICE ROUTER FOR WHATSAPP ---
-    if (whatsappBtn) {
-      const waPhone = "917598576406";
-      const waText = encodeURIComponent("Hello, I am interested in partnering with IBM Qiskit Fall Fest 2026 at Bharathidasan University.");
-      
-      // Smart detection: Bypasses xdg-open issues on Desktop Linux/Windows by forcing web client
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      
-      whatsappBtn.href = isMobile 
-        ? `https://api.whatsapp.com/send?phone=${waPhone}&text=${waText}`
-        : `https://web.whatsapp.com/send?phone=${waPhone}&text=${waText}`;
-    }
 
     let previousActiveElement = null;
 
