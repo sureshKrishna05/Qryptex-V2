@@ -236,13 +236,6 @@ const {
         : `https://web.whatsapp.com/send?phone=${waPhone}&text=${waText}`;
     }
 
-    // --- REFRESH-AWARE DISPLAY LOGIC ---
-    // Resets on page reload (F5) but persists across Astro's internal view transitions
-    if (window.__qryptex_flash_shown === true) {
-      modal.classList.add("invisible");
-      return;
-    }
-
     let previousActiveElement = null;
 
     const openModal = () => {
@@ -305,8 +298,14 @@ const {
       }
     });
 
-    const timer = setTimeout(openModal, delayMs);
-    return () => clearTimeout(timer);
+    // --- REFRESH-AWARE DISPLAY LOGIC ---
+    // Resets on page reload (F5) but persists across Astro's internal view transitions
+    if (window.__qryptex_flash_shown !== true) {
+      const timer = setTimeout(openModal, delayMs);
+      return () => clearTimeout(timer);
+    } else {
+      modal.classList.add("invisible");
+    }
   }
 
   // Initialize on hard load and subsequent Astro page transitions
