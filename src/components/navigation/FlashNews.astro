@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import { siteConfig } from "../../data/site";
 
 // Import local assets from src/assets/
-import bduLogo from "../../assets/bdu.png";
+
 import qiskitLogo from "../../assets/qiskit-badge.png";
 
 if (!siteConfig.flashNews?.enabled) {
@@ -87,25 +87,6 @@ const {
       {/* CO-BRANDED PARTNERSHIP LOGO SHOWCASE */}
       <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
         <div class="flex items-center gap-3.5">
-          {/* BDU Logo Container (Optimized with lazy load & WebP) */}
-          <div class="group/logo flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] p-2 shadow-sm transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-[var(--color-accent)]/60 hover:shadow-md sm:h-20 sm:w-20 transform-gpu">
-            <Image
-              src={bduLogo}
-              alt="Bharathidasan University Logo"
-              width={100}
-              height={100}
-              format="webp"
-              quality={80}
-              loading="lazy"
-              decoding="async"
-              class="h-full w-full object-contain transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/logo:scale-105 transform-gpu"
-            />
-          </div>
-
-          {/* Partnership Multiplier Icon */}
-          <span class="text-xl font-light text-[var(--color-text-muted)] opacity-50" aria-hidden="true">
-            ×
-          </span>
 
           {/* Qiskit Fallfest Badge Container (Optimized with lazy load & WebP) */}
           <div class="group/logo flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-background)] p-2 shadow-sm transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-[var(--color-accent)]/60 hover:shadow-md sm:h-20 sm:w-20 transform-gpu">
@@ -166,6 +147,16 @@ const {
         >
           Maybe Later
         </button>
+
+        <a
+          href="https://qiskit-fallfest-website.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] px-6 py-3.5 text-center text-sm font-semibold text-[var(--color-text)] transition-all duration-300 hover:border-[var(--color-accent)] hover:bg-[var(--color-surface)] hover:text-[var(--color-accent)] sm:w-auto"
+        >
+          Event Website
+        </a>
+
 
         {/* Primary CTA Button -> Injected dynamically via script */}
         <a
@@ -236,13 +227,6 @@ const {
         : `https://web.whatsapp.com/send?phone=${waPhone}&text=${waText}`;
     }
 
-    // --- REFRESH-AWARE DISPLAY LOGIC ---
-    // Resets on page reload (F5) but persists across Astro's internal view transitions
-    if (window.__qryptex_flash_shown === true) {
-      modal.classList.add("invisible");
-      return;
-    }
-
     let previousActiveElement = null;
 
     const openModal = () => {
@@ -305,8 +289,14 @@ const {
       }
     });
 
-    const timer = setTimeout(openModal, delayMs);
-    return () => clearTimeout(timer);
+    // --- REFRESH-AWARE DISPLAY LOGIC ---
+    // Resets on page reload (F5) but persists across Astro's internal view transitions
+    if (window.__qryptex_flash_shown !== true) {
+      const timer = setTimeout(openModal, delayMs);
+      return () => clearTimeout(timer);
+    } else {
+      modal.classList.add("invisible");
+    }
   }
 
   // Initialize on hard load and subsequent Astro page transitions
