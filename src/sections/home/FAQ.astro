@@ -1,0 +1,55 @@
+---
+import Container from "../../components/ui/Container.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+
+const faqs = [
+  {
+    question: "What types of cybersecurity services do you offer?",
+    answer: "We offer comprehensive cybersecurity solutions including penetration testing, vulnerability assessments, security auditing, and continuous monitoring to protect your digital assets."
+  },
+  {
+    question: "How can AI integration benefit my business?",
+    answer: "AI can automate repetitive tasks, provide deep insights through data analysis, enhance customer experiences with intelligent chatbots, and optimize your overall operational efficiency."
+  },
+  {
+    question: "Do you build custom software from scratch?",
+    answer: "Yes, our software engineering team specializes in building scalable, secure, and high-performance custom applications tailored to your specific business requirements."
+  },
+  {
+    question: "How long does a typical engagement last?",
+    answer: "The duration varies depending on the project scope. A security audit might take a few weeks, while custom software development can range from a few months to ongoing continuous delivery."
+  }
+];
+---
+
+<section
+  id="faq"
+  aria-label="Frequently Asked Questions"
+  class="relative overflow-hidden py-32 lg:py-40 bg-[var(--color-surface)] border-y border-[var(--color-border)]"
+>
+  <Container class="relative z-10 max-w-4xl">
+    <SectionHeading
+      eyebrow="FAQ"
+      title="Frequently Asked Questions"
+      description="Find answers to common questions about our services and methodology."
+    />
+
+    <div class="mt-16 space-y-4">
+      {faqs.map((faq) => (
+        <details class="group rounded-[24px] border border-[var(--color-border)] bg-[var(--color-background)] p-6 transition-all duration-300 open:border-[var(--color-accent)]/40 hover:border-[var(--color-accent)]/40 sm:p-8">
+          <summary class="flex cursor-pointer items-center justify-between font-bold tracking-tight text-xl text-[var(--color-text)] marker:content-none transition-colors duration-300">
+            {faq.question}
+            <span class="ml-6 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] transition-transform duration-300 group-open:rotate-180 group-open:border-[var(--color-accent)] group-open:bg-[var(--color-accent)] group-open:text-white dark:group-open:text-black">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="h-5 w-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-4 pr-12 text-lg leading-relaxed text-[var(--color-text-muted)]">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </Container>
+</section>
