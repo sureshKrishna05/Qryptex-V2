@@ -1,149 +1,113 @@
 # Qryptex Website
 
-Official website for **Qryptex**, a security-first technology company specializing in Cybersecurity, Artificial Intelligence, Software Engineering, and Custom Technology Solutions.
+<div align="center">
+  <img src="https://img.shields.io/badge/Framework-Astro_6.0-FF5D01?style=for-the-badge&logo=astro&logoColor=white" alt="Astro" />
+  <img src="https://img.shields.io/badge/Styling-Tailwind_CSS_4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Language-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Deployment-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+</div>
 
-## About Qryptex
+<br />
 
-Qryptex helps organizations build, secure, and scale technology systems through a security-first approach. We combine expertise in cybersecurity, software engineering, artificial intelligence, and custom technology development to deliver solutions designed for resilience, innovation, and long-term growth.
+The official web platform for **Qryptex**, a security-first technology company specializing in Cybersecurity, Artificial Intelligence, Software Engineering, and Custom Technology Solutions.
 
-**Tagline:** Security First. Innovation Always.
-
----
-
-## Technology Stack
-
-* Astro
-* Tailwind CSS
-* TypeScript
-* Responsive Design
-* Dark / Light Theme Support
+[**Visit the Website**](https://qryptex.in)
 
 ---
 
-## Features
+## 🔒 Security First. Innovation Always.
 
-### Website Features
+Qryptex helps organizations build, secure, and scale technology systems through a zero-trust, security-first approach. We combine expertise in cybersecurity, software engineering, artificial intelligence, and custom technology development to deliver solutions designed for resilience, innovation, and long-term business value.
 
-* Modern responsive design
-* Dark and light mode
-* Service-specific landing pages
-* Smooth navigation
-* SEO-ready architecture
-* Mobile-friendly layout
-* Reusable component architecture
+## ✨ Core Capabilities
 
-### Services Showcased
-
-* Cybersecurity Services
-* AI Solutions
-* Software Engineering
-* Custom Technology Solutions
+- **🛡️ Cybersecurity Services:** Penetration testing, vulnerability assessments, and continuous security monitoring.
+- **🧠 AI Solutions:** Intelligent automation, predictive analytics, and enterprise AI integrations.
+- **💻 Software Engineering:** Scalable, secure, cloud-native custom software development.
+- **⚙️ Custom Solutions:** DevSecOps, infrastructure architecture, and digital transformation.
 
 ---
 
-## Project Structure
+## 🚀 Technical Architecture
 
-```text
-src/
-├── components/
-│   ├── navigation/
-│   ├── seo/
-│   └── ui/
-│
-├── data/
-│   ├── navigation.ts
-│   ├── services.ts
-│   └── site.ts
-│
-├── layouts/
-│   ├── BaseLayout.astro
-│   └── ServiceLayout.astro
-│
-├── pages/
-│   ├── index.astro
-│   ├── about.astro
-│   ├── contact.astro
-│   └── services/
-│       ├── cybersecurity.astro
-│       ├── ai-solutions.astro
-│       ├── software-engineering.astro
-│       └── custom-technology-solutions.astro
-│
-├── sections/
-│   └── home/
-│
-└── styles/
-    └── global.css
-```
+Built with modern web standards, focusing on high performance, accessibility, and SEO optimization.
+
+- **[Astro](https://astro.build/)**: Static Site Generation (SSG) for lightning-fast page loads and zero Javascript overhead where possible.
+- **[Tailwind CSS](https://tailwindcss.com/)**: Utility-first CSS framework (v4) with native Vite integration for rapid, scalable UI development.
+- **[TypeScript](https://www.typescriptlang.org/)**: Strongly typed development environment for maximum code reliability.
+- **[Zod](https://zod.dev/)**: Schema validation for secure runtime form handling.
+- **[Resend](https://resend.com/)**: Reliable transactional email delivery for contact forms.
+
+### Performance & SEO
+- Automated Sitemap generation (`@astrojs/sitemap`).
+- Strict JSON-LD Schema.org markup.
+- View Transitions API enabled via `<ClientRouter />` for SPA-like navigation speeds.
+- System-font stack implementation to eliminate render-blocking font requests.
+- WAI-ARIA compliant semantic HTML and accessible navigation flows.
 
 ---
 
-## Installation
+## 🛠️ Local Development
 
-Clone the repository:
+### Prerequisites
+- **Node.js** (v22.x recommended)
+- **pnpm** (Package manager)
 
-```bash
-git clone https://github.com/<your-username>/qryptex.git
-```
+### Installation
 
-Navigate into the project:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/sureshKrishna05/Qryptex-V2.git
+   cd Qryptex-V2
+   ```
 
-```bash
-cd qryptex
-```
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   ```
 
-Install dependencies:
-
-```bash
-pnpm install
-```
-
-Start development server:
-
-```bash
-pnpm run dev
-```
+3. **Start the development server**
+   ```bash
+   pnpm run dev
+   ```
+   The site will be available at `http://localhost:4321`.
 
 ---
 
-## Build For Production
+## 🏗️ Build & Deployment
 
+This project is configured for seamless deployment on **Vercel** using the `@astrojs/vercel` adapter.
+
+**Production Build:**
 ```bash
 pnpm run build
 ```
 
-Preview production build:
-
+**Local Preview:**
 ```bash
 pnpm run preview
 ```
 
 ---
 
-## Design Principles
+## 📁 Project Structure
 
-* Security-first mindset
-* Clean and professional user experience
-* Performance-focused architecture
-* Accessibility and responsiveness
-* Scalable component structure
-* Maintainable codebase
-
----
-
-## Future Roadmap
-
-* Dynamic service routing
-* Blog platform
-* Case studies section
-* Contact form backend integration
-* Analytics integration
-* Enhanced SEO optimization
-* Performance monitoring
-* Service inquiry automation
+```text
+src/
+├── assets/          # Static assets (images, icons)
+├── components/      # Reusable UI architecture
+│   ├── navigation/  # Navbar, Footer, FlashNews
+│   ├── seo/         # SEO management and JSON-LD
+│   └── ui/          # Buttons, Containers, Typography
+├── data/            # Centralized configuration and content (e.g., FAQ, Site info)
+├── layouts/         # Page wrappers (BaseLayout, ServiceLayout)
+├── pages/           # File-based routing (Astro Pages & API endpoints)
+├── sections/        # Modular page blocks (Hero, Features, FAQ)
+└── styles/          # Global CSS variables and Tailwind directives
+```
 
 ---
 
-## License
+## 📄 License
 
-© Qryptex. All rights reserved.
+© 2026 Qryptex. All rights reserved. This repository and its contents are proprietary.
