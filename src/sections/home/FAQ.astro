@@ -25,7 +25,7 @@ const faqs = [
 <section
   id="faq"
   aria-label="Frequently Asked Questions"
-  class="relative overflow-hidden py-32 lg:py-40 bg-[var(--color-surface)] border-y border-[var(--color-border)]"
+  class="relative py-32 lg:py-40"
 >
   <Container class="relative z-10 max-w-4xl">
     <SectionHeading
@@ -34,18 +34,30 @@ const faqs = [
       description="Find answers to common questions about our services and methodology."
     />
 
-    <div class="mt-16 space-y-4">
+    <div class="mt-20 space-y-6">
       {faqs.map((faq) => (
-        <details class="group rounded-[24px] border border-[var(--color-border)] bg-[var(--color-background)] p-6 transition-all duration-300 open:border-[var(--color-accent)]/40 hover:border-[var(--color-accent)]/40 sm:p-8">
-          <summary class="flex cursor-pointer items-center justify-between font-bold tracking-tight text-xl text-[var(--color-text)] marker:content-none transition-colors duration-300">
-            {faq.question}
-            <span class="ml-6 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] transition-transform duration-300 group-open:rotate-180 group-open:border-[var(--color-accent)] group-open:bg-[var(--color-accent)] group-open:text-white dark:group-open:text-black">
+        <details class="group relative overflow-hidden rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)]/80 p-8 shadow-sm backdrop-blur-xl transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-[var(--color-accent)]/40 hover:bg-[var(--color-surface)] hover:shadow-2xl hover:shadow-[var(--color-accent-glow)] transform-gpu sm:p-10">
+          
+          <div
+            aria-hidden="true"
+            class="absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-[1200ms] ease-out group-hover:translate-x-full dark:via-white/5 transform-gpu pointer-events-none"
+          ></div>
+
+          <summary class="relative z-10 flex cursor-pointer items-center justify-between marker:content-none w-full outline-none">
+            <h3 class="text-lg font-bold tracking-tight text-[var(--color-text)] transition-colors duration-500 group-hover:text-[var(--color-accent)] sm:text-xl">
+              {faq.question}
+            </h3>
+            <span 
+              aria-hidden="true"
+              class="ml-6 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] text-[var(--color-text)] shadow-sm transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-open:rotate-180 group-open:border-[var(--color-accent)]/50 group-open:bg-[var(--color-accent)]/10 group-open:text-[var(--color-accent)] group-hover:border-[var(--color-accent)]/50 group-hover:text-[var(--color-accent)] group-hover:shadow-[0_0_15px_var(--color-accent-glow)] transform-gpu"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="h-5 w-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
               </svg>
             </span>
           </summary>
-          <div class="mt-4 pr-12 text-lg leading-relaxed text-[var(--color-text-muted)]">
+          
+          <div class="relative z-10 mt-5 pr-14 text-base leading-relaxed text-[var(--color-text-muted)] transition-colors duration-500 group-hover:text-[var(--color-text)]">
             <p>{faq.answer}</p>
           </div>
         </details>
