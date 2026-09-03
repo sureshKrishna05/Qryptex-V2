@@ -1,0 +1,112 @@
+---
+// An ultra-premium, context-aware floating action button (FAB) for mobile users
+---
+
+<div 
+  id="mobile-home-wrapper" 
+  class="fixed bottom-6 right-6 z-[90] translate-y-24 scale-75 opacity-0 transition-all duration-[700ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] md:hidden pointer-events-none"
+>
+  
+  <button
+    id="mobile-home-btn"
+    aria-label="Quick Navigation"
+    class="pointer-events-auto group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-[var(--color-border)] bg-[var(--color-surface)]/80 backdrop-blur-2xl text-[var(--color-text)] shadow-lg shadow-[var(--color-accent-glow)] transition-all duration-[500ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-105 hover:border-[var(--color-accent)]/50 hover:bg-[var(--color-surface)] active:scale-90"
+  >
+    {/* Ambient Glow tied to accent color */}
+    <div class="absolute inset-0 bg-gradient-to-tr from-[var(--color-accent)]/30 to-transparent opacity-50 pointer-events-none"></div>
+
+    {/* Sweeping Shine Effect (triggered by JS) */}
+    <div id="btn-shine" class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-[var(--color-text)]/10 to-transparent opacity-0 transition-transform duration-[1000ms] ease-in-out pointer-events-none"></div>
+    
+    {/* Icon Container with Spring Levitation */}
+    <div class="relative z-10 flex h-full w-full items-center justify-center transition-transform duration-[500ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1">
+      
+      {/* Home Icon (For internal pages) */}
+      <svg id="icon-home" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="absolute h-[22px] w-[22px] transition-all duration-[700ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-100 opacity-100 rotate-0">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+      </svg>
+      
+      {/* Arrow Up Icon (For Home Page) */}
+      <svg id="icon-up" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="absolute h-[22px] w-[22px] transition-all duration-[700ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-50 opacity-0 -rotate-90">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
+      </svg>
+
+    </div>
+  </button>
+</div>
+
+<script is:inline>
+  function initMobileHomeBtn() {
+    const wrapper = document.getElementById('mobile-home-wrapper');
+    const btn = document.getElementById('mobile-home-btn');
+    const iconHome = document.getElementById('icon-home');
+    const iconUp = document.getElementById('icon-up');
+    const shine = document.getElementById('btn-shine');
+    
+    if (!wrapper || !btn || !iconHome || !iconUp || !shine) return;
+
+    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+
+    // Premium iOS-style Spring Icon Swap
+    if (isHomePage) {
+      iconHome.classList.replace('scale-100', 'scale-50');
+      iconHome.classList.replace('opacity-100', 'opacity-0');
+      iconHome.classList.replace('rotate-0', 'rotate-180');
+      
+      iconUp.classList.replace('scale-50', 'scale-100');
+      iconUp.classList.replace('opacity-0', 'opacity-100');
+      iconUp.classList.replace('-rotate-90', 'rotate-0');
+      
+      btn.setAttribute('aria-label', 'Scroll to top');
+      btn.setAttribute('title', 'Scroll to top');
+    } else {
+      btn.setAttribute('aria-label', 'Return to Home');
+      btn.setAttribute('title', 'Return to Home');
+    }
+
+    const triggerShine = () => {
+      shine.classList.remove('opacity-0', '-translate-x-full');
+      shine.classList.add('opacity-100', 'translate-x-full');
+      setTimeout(() => {
+        shine.classList.add('opacity-0');
+        shine.classList.remove('translate-x-full');
+        setTimeout(() => shine.classList.add('-translate-x-full'), 50);
+      }, 1000);
+    };
+
+    const handleScroll = () => {
+      // Spring entrance
+      if (window.scrollY > 150) {
+        if (wrapper.classList.contains('opacity-0')) {
+          wrapper.classList.remove('translate-y-24', 'scale-75', 'opacity-0');
+          wrapper.classList.add('translate-y-0', 'scale-100', 'opacity-100');
+          // Trigger the luxurious shine effect just after it pops in
+          setTimeout(triggerShine, 400);
+        }
+      } else {
+        wrapper.classList.add('translate-y-24', 'scale-75', 'opacity-0');
+        wrapper.classList.remove('translate-y-0', 'scale-100', 'opacity-100');
+      }
+    };
+
+    const handleClick = () => {
+      if (isHomePage) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Allow the satisfying scale-90 press animation to play
+        setTimeout(() => { window.location.href = '/'; }, 150);
+      }
+    };
+
+    window.removeEventListener('scroll', handleScroll);
+    btn.removeEventListener('click', handleClick);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    btn.addEventListener('click', handleClick);
+
+    handleScroll();
+  }
+
+  initMobileHomeBtn();
+  document.addEventListener('astro:page-load', initMobileHomeBtn);
+</script>
