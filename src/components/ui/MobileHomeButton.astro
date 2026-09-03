@@ -10,13 +10,13 @@
   <button
     id="mobile-home-btn"
     aria-label="Quick Navigation"
-    class="pointer-events-auto group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-white/20 backdrop-blur-2xl text-[var(--color-text)] shadow-[0_8px_32px_rgba(0,0,0,0.12)] transition-all duration-[500ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-105 hover:bg-white/30 active:scale-90 dark:border-white/10 dark:bg-black/30 dark:hover:bg-black/40"
+    class="pointer-events-auto group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-[var(--color-border)] bg-[var(--color-surface)]/80 backdrop-blur-2xl text-[var(--color-text)] shadow-lg shadow-[var(--color-accent-glow)] transition-all duration-[500ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-105 hover:border-[var(--color-accent)]/50 hover:bg-[var(--color-surface)] active:scale-90"
   >
     {/* Ambient Glow tied to accent color */}
     <div class="absolute inset-0 bg-gradient-to-tr from-[var(--color-accent)]/30 to-transparent opacity-50 pointer-events-none"></div>
 
     {/* Sweeping Shine Effect (triggered by JS) */}
-    <div id="btn-shine" class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 transition-transform duration-[1000ms] ease-in-out pointer-events-none"></div>
+    <div id="btn-shine" class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-[var(--color-text)]/10 to-transparent opacity-0 transition-transform duration-[1000ms] ease-in-out pointer-events-none"></div>
     
     {/* Icon Container with Spring Levitation */}
     <div class="relative z-10 flex h-full w-full items-center justify-center transition-transform duration-[500ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1">
