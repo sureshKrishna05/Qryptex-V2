@@ -1,30 +1,33 @@
 ---
-// A premium, context-aware floating action button (FAB) for mobile users
+// An ultra-premium, context-aware floating action button (FAB) for mobile users
 ---
 
-<div id="mobile-home-wrapper" class="fixed bottom-6 right-6 z-[90] translate-y-24 opacity-0 transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden">
-  
-  {/* Ambient Pulsing Glow Effect */}
-  <div class="absolute inset-0 -z-10 animate-ping rounded-full bg-[var(--color-accent)] opacity-20 duration-1000"></div>
+<div 
+  id="mobile-home-wrapper" 
+  class="fixed bottom-6 right-6 z-[90] translate-y-24 scale-75 opacity-0 transition-all duration-[700ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] md:hidden pointer-events-none"
+>
   
   <button
     id="mobile-home-btn"
     aria-label="Quick Navigation"
-    class="group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-[var(--color-border)] bg-[var(--color-surface)]/70 backdrop-blur-2xl text-[var(--color-text)] shadow-xl shadow-[var(--color-accent-glow)] transition-all duration-[400ms] hover:scale-110 hover:border-[var(--color-accent)]/50 active:scale-90"
+    class="pointer-events-auto group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-white/20 backdrop-blur-2xl text-[var(--color-text)] shadow-[0_8px_32px_rgba(0,0,0,0.12)] transition-all duration-[500ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-105 hover:bg-white/30 active:scale-90 dark:border-white/10 dark:bg-black/30 dark:hover:bg-black/40"
   >
-    {/* Premium Hover Gradient Background */}
-    <div class="absolute inset-0 bg-gradient-to-tr from-[var(--color-accent)]/20 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"></div>
+    {/* Ambient Glow tied to accent color */}
+    <div class="absolute inset-0 bg-gradient-to-tr from-[var(--color-accent)]/30 to-transparent opacity-50 pointer-events-none"></div>
+
+    {/* Sweeping Shine Effect (triggered by JS) */}
+    <div id="btn-shine" class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 transition-transform duration-[1000ms] ease-in-out pointer-events-none"></div>
     
-    {/* Icon Container with Hover Levitation */}
-    <div class="relative z-10 flex h-full w-full items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:text-[var(--color-accent)]">
+    {/* Icon Container with Spring Levitation */}
+    <div class="relative z-10 flex h-full w-full items-center justify-center transition-transform duration-[500ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1">
       
-      {/* Home Icon (Default for internal pages) */}
-      <svg id="icon-home" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="absolute h-6 w-6 transition-all duration-[600ms] ease-out scale-100 opacity-100 rotate-0">
+      {/* Home Icon (For internal pages) */}
+      <svg id="icon-home" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="absolute h-[22px] w-[22px] transition-all duration-[700ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-100 opacity-100 rotate-0">
         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
       </svg>
       
-      {/* Arrow Up Icon (For Home Page to scroll to top) */}
-      <svg id="icon-up" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="absolute h-6 w-6 transition-all duration-[600ms] ease-out scale-50 opacity-0 -rotate-90">
+      {/* Arrow Up Icon (For Home Page) */}
+      <svg id="icon-up" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="absolute h-[22px] w-[22px] transition-all duration-[700ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] scale-50 opacity-0 -rotate-90">
         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
       </svg>
 
@@ -38,16 +41,17 @@
     const btn = document.getElementById('mobile-home-btn');
     const iconHome = document.getElementById('icon-home');
     const iconUp = document.getElementById('icon-up');
+    const shine = document.getElementById('btn-shine');
     
-    if (!wrapper || !btn || !iconHome || !iconUp) return;
+    if (!wrapper || !btn || !iconHome || !iconUp || !shine) return;
 
     const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
 
-    // Context-Aware Icon Swapping Animation
+    // Premium iOS-style Spring Icon Swap
     if (isHomePage) {
       iconHome.classList.replace('scale-100', 'scale-50');
       iconHome.classList.replace('opacity-100', 'opacity-0');
-      iconHome.classList.replace('rotate-0', 'rotate-90');
+      iconHome.classList.replace('rotate-0', 'rotate-180');
       
       iconUp.classList.replace('scale-50', 'scale-100');
       iconUp.classList.replace('opacity-0', 'opacity-100');
@@ -60,14 +64,28 @@
       btn.setAttribute('title', 'Return to Home');
     }
 
+    const triggerShine = () => {
+      shine.classList.remove('opacity-0', '-translate-x-full');
+      shine.classList.add('opacity-100', 'translate-x-full');
+      setTimeout(() => {
+        shine.classList.add('opacity-0');
+        shine.classList.remove('translate-x-full');
+        setTimeout(() => shine.classList.add('-translate-x-full'), 50);
+      }, 1000);
+    };
+
     const handleScroll = () => {
-      // Slide up and fade in smoothly after scrolling 150px
+      // Spring entrance
       if (window.scrollY > 150) {
-        wrapper.classList.remove('translate-y-24', 'opacity-0');
-        wrapper.classList.add('translate-y-0', 'opacity-100');
+        if (wrapper.classList.contains('opacity-0')) {
+          wrapper.classList.remove('translate-y-24', 'scale-75', 'opacity-0');
+          wrapper.classList.add('translate-y-0', 'scale-100', 'opacity-100');
+          // Trigger the luxurious shine effect just after it pops in
+          setTimeout(triggerShine, 400);
+        }
       } else {
-        wrapper.classList.add('translate-y-24', 'opacity-0');
-        wrapper.classList.remove('translate-y-0', 'opacity-100');
+        wrapper.classList.add('translate-y-24', 'scale-75', 'opacity-0');
+        wrapper.classList.remove('translate-y-0', 'scale-100', 'opacity-100');
       }
     };
 
@@ -75,7 +93,7 @@
       if (isHomePage) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        // Slight delay allows the user to see the springy tap-down animation before navigation triggers
+        // Allow the satisfying scale-90 press animation to play
         setTimeout(() => { window.location.href = '/'; }, 150);
       }
     };
@@ -86,7 +104,6 @@
     window.addEventListener('scroll', handleScroll, { passive: true });
     btn.addEventListener('click', handleClick);
 
-    // Trigger check immediately
     handleScroll();
   }
 
