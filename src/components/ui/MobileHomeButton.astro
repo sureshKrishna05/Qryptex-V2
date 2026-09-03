@@ -1,0 +1,57 @@
+---
+// A floating action button (FAB) for mobile users to easily return to Home or scroll to top
+---
+
+<button
+  id="mobile-home-btn"
+  aria-label="Return to Home"
+  title="Return to Home"
+  class="fixed bottom-6 right-6 z-[90] flex h-14 w-14 translate-y-24 items-center justify-center rounded-full bg-[var(--color-accent)] text-white opacity-0 shadow-lg shadow-[var(--color-accent-glow)] transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-110 active:scale-95 md:hidden dark:text-black"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+  </svg>
+</button>
+
+<script is:inline>
+  function initMobileHomeBtn() {
+    const btn = document.getElementById('mobile-home-btn');
+    if (!btn) return;
+
+    // Optional: Only show the button after scrolling down slightly to reduce clutter at the absolute top
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        btn.classList.remove('translate-y-24', 'opacity-0');
+        btn.classList.add('translate-y-0', 'opacity-100');
+      } else {
+        btn.classList.add('translate-y-24', 'opacity-0');
+        btn.classList.remove('translate-y-0', 'opacity-100');
+      }
+    };
+
+    const handleClick = () => {
+      if (window.location.pathname === '/') {
+        // If already on the home page, smoothly scroll to the top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Otherwise, navigate back to the home page
+        window.location.href = '/';
+      }
+    };
+
+    // Remove old listeners to prevent duplication on Astro page swaps
+    window.removeEventListener('scroll', handleScroll);
+    btn.removeEventListener('click', handleClick);
+
+    window.addEventListener('scroll', handleScroll);
+    btn.addEventListener('click', handleClick);
+
+    // Check initial state
+    handleScroll();
+  }
+
+  // Initialize on first load
+  initMobileHomeBtn();
+  // Initialize on subsequent Astro page navigations
+  document.addEventListener('astro:page-load', initMobileHomeBtn);
+</script>
