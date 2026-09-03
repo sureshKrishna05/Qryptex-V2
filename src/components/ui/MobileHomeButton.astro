@@ -1,57 +1,95 @@
 ---
-// A floating action button (FAB) for mobile users to easily return to Home or scroll to top
+// A premium, context-aware floating action button (FAB) for mobile users
 ---
 
-<button
-  id="mobile-home-btn"
-  aria-label="Return to Home"
-  title="Return to Home"
-  class="fixed bottom-6 right-6 z-[90] flex h-14 w-14 translate-y-24 items-center justify-center rounded-full bg-[var(--color-accent)] text-white opacity-0 shadow-lg shadow-[var(--color-accent-glow)] transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-110 active:scale-95 md:hidden dark:text-black"
->
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-  </svg>
-</button>
+<div id="mobile-home-wrapper" class="fixed bottom-6 right-6 z-[90] translate-y-24 opacity-0 transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden">
+  
+  {/* Ambient Pulsing Glow Effect */}
+  <div class="absolute inset-0 -z-10 animate-ping rounded-full bg-[var(--color-accent)] opacity-20 duration-1000"></div>
+  
+  <button
+    id="mobile-home-btn"
+    aria-label="Quick Navigation"
+    class="group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-[var(--color-border)] bg-[var(--color-surface)]/70 backdrop-blur-2xl text-[var(--color-text)] shadow-xl shadow-[var(--color-accent-glow)] transition-all duration-[400ms] hover:scale-110 hover:border-[var(--color-accent)]/50 active:scale-90"
+  >
+    {/* Premium Hover Gradient Background */}
+    <div class="absolute inset-0 bg-gradient-to-tr from-[var(--color-accent)]/20 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"></div>
+    
+    {/* Icon Container with Hover Levitation */}
+    <div class="relative z-10 flex h-full w-full items-center justify-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:text-[var(--color-accent)]">
+      
+      {/* Home Icon (Default for internal pages) */}
+      <svg id="icon-home" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="absolute h-6 w-6 transition-all duration-[600ms] ease-out scale-100 opacity-100 rotate-0">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+      </svg>
+      
+      {/* Arrow Up Icon (For Home Page to scroll to top) */}
+      <svg id="icon-up" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="absolute h-6 w-6 transition-all duration-[600ms] ease-out scale-50 opacity-0 -rotate-90">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
+      </svg>
+
+    </div>
+  </button>
+</div>
 
 <script is:inline>
   function initMobileHomeBtn() {
+    const wrapper = document.getElementById('mobile-home-wrapper');
     const btn = document.getElementById('mobile-home-btn');
-    if (!btn) return;
+    const iconHome = document.getElementById('icon-home');
+    const iconUp = document.getElementById('icon-up');
+    
+    if (!wrapper || !btn || !iconHome || !iconUp) return;
 
-    // Optional: Only show the button after scrolling down slightly to reduce clutter at the absolute top
+    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+
+    // Context-Aware Icon Swapping Animation
+    if (isHomePage) {
+      iconHome.classList.replace('scale-100', 'scale-50');
+      iconHome.classList.replace('opacity-100', 'opacity-0');
+      iconHome.classList.replace('rotate-0', 'rotate-90');
+      
+      iconUp.classList.replace('scale-50', 'scale-100');
+      iconUp.classList.replace('opacity-0', 'opacity-100');
+      iconUp.classList.replace('-rotate-90', 'rotate-0');
+      
+      btn.setAttribute('aria-label', 'Scroll to top');
+      btn.setAttribute('title', 'Scroll to top');
+    } else {
+      btn.setAttribute('aria-label', 'Return to Home');
+      btn.setAttribute('title', 'Return to Home');
+    }
+
     const handleScroll = () => {
-      if (window.scrollY > 100) {
-        btn.classList.remove('translate-y-24', 'opacity-0');
-        btn.classList.add('translate-y-0', 'opacity-100');
+      // Slide up and fade in smoothly after scrolling 150px
+      if (window.scrollY > 150) {
+        wrapper.classList.remove('translate-y-24', 'opacity-0');
+        wrapper.classList.add('translate-y-0', 'opacity-100');
       } else {
-        btn.classList.add('translate-y-24', 'opacity-0');
-        btn.classList.remove('translate-y-0', 'opacity-100');
+        wrapper.classList.add('translate-y-24', 'opacity-0');
+        wrapper.classList.remove('translate-y-0', 'opacity-100');
       }
     };
 
     const handleClick = () => {
-      if (window.location.pathname === '/') {
-        // If already on the home page, smoothly scroll to the top
+      if (isHomePage) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        // Otherwise, navigate back to the home page
-        window.location.href = '/';
+        // Slight delay allows the user to see the springy tap-down animation before navigation triggers
+        setTimeout(() => { window.location.href = '/'; }, 150);
       }
     };
 
-    // Remove old listeners to prevent duplication on Astro page swaps
     window.removeEventListener('scroll', handleScroll);
     btn.removeEventListener('click', handleClick);
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     btn.addEventListener('click', handleClick);
 
-    // Check initial state
+    // Trigger check immediately
     handleScroll();
   }
 
-  // Initialize on first load
   initMobileHomeBtn();
-  // Initialize on subsequent Astro page navigations
   document.addEventListener('astro:page-load', initMobileHomeBtn);
 </script>
